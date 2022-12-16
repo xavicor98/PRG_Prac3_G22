@@ -1,4 +1,4 @@
-package datos;
+	package datos;
 import java.util.Arrays;
 /* Programador: Francisco Manuel Gonzalez Ortegon */
 public class usuario {

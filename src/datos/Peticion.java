@@ -5,17 +5,22 @@ import java.util.Random;
 public class Peticion {
 	
 	private String id;
-	private Usuario proveedor;
-	private Usuario cliente;
-	private Producto prodOfrecido;
-	private Producto prodPedido;
+	private usuario proveedor;
+	private usuario cliente;
+	//Discernir entre productos
+	private Productos prodOfrecido;
+	private Productos prodPedido;
+	//Y servicios
+	private Servicios servicioOfrecido;
+	private Servicios servicioPedido;
+	
 	private int estadoPeticion = 0;
 	private int valoracion;
 	
 
 	
-
-	public Peticion(String id, Usuario proveedor, Usuario cliente, Producto prodPedido, Producto prodOfrecido) {
+//Constructor en caso de pasarle un producto
+	public Peticion(String id, usuario proveedor, usuario cliente, Productos prodPedido, Productos prodOfrecido) {
 		this.id = randomCharArray(5);
 		this.proveedor = proveedor;
 		this.cliente = cliente;
@@ -23,7 +28,14 @@ public class Peticion {
 		this.prodOfrecido = prodOfrecido;
 	}
 
-	
+	//Constructor en caso de pasarle un servicio
+		public Peticion(String id, usuario proveedor, usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
+			this.id = randomCharArray(5);
+			this.proveedor = proveedor;
+			this.cliente = cliente;
+			this.servicioPedido = servicioPedido;
+			this.servicioOfrecido = servicioOfrecido;
+		}
 	//Rechaza la peticion
 	public void acepta() {
 		estadoPeticion = 1;
@@ -35,9 +47,13 @@ public class Peticion {
 	}
 	
 	
-	//devuelve una copia de la peticion
+	//devuelve una copia de la peticion dependiendo si contiene un servicio o un bien
 	protected Peticion copia() {
-		return new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		if(servicioPedido == null)
+			return new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		else {
+			return new Peticion(id, proveedor, cliente, servicioPedido, servicioOfrecido);
+		}
 	}
 
 	@Override
@@ -63,12 +79,22 @@ public class Peticion {
 				break;
 			}
 		}
-		retorno= "Peticion con id= "+ id +" "+infoEstado +
-				"\n\tcliente=" + cliente.getnUsuario() + 
-				"\n\tprodPedido=" + prodPedido.getnProducto()+
-				"\n\tproveedor=" + proveedor.getnUsuario() + 
-				"\n\tprodOfrecido=" + prodOfrecido.getnProducto() +
-				retorno;
+		if(servicioPedido == null) {
+			retorno= "Peticion con id= "+ id +" "+infoEstado +
+					"\n\tcliente=" + cliente.getAlias() + 
+					"\n\tservicioPedido=" + prodPedido.getId()+
+					"\n\tproveedor=" + proveedor.getAlias() + 
+					"\n\tservicioPedido=" + prodOfrecido.getId() +
+					retorno;
+		}else {
+			retorno= "Peticion con id= "+ id +" "+infoEstado +
+					"\n\tcliente=" + cliente.getAlias() + 
+					"\n\tprodPedido=" + servicioPedido.getId()+
+					"\n\tproveedor=" + proveedor.getAlias() + 
+					"\n\tprodOfrecido=" + servicioPedido.getId() +
+					retorno;
+		}
+		
 
 
 
@@ -79,7 +105,7 @@ public class Peticion {
 	 * @return comparador de id del producto, devuelve true si es igual
 	 */
 	public boolean esEsteId(String id) {
-		return id.equalsIgnoreCase(prodOfrecido.getnProducto());
+		return id.equalsIgnoreCase(prodOfrecido.getId());
 	}
 	
 	/**
@@ -88,38 +114,30 @@ public class Peticion {
 	public String getId() {
 		return id;
 	}
+	/* TODO codigo pendiente de revision
+	 * 
+	 *
 
-	/**
-	 * @return the usuario
-	 */
 	public Usuario getProveedor() {
 		return proveedor;
 	}
 
-	/**
-	 * @return the proveedor
-	 */
+
 	public Usuario getCliente() {
 		return cliente;
 	}
 
-	/**
-	 * @return the prodOfrecido
-	 */
+
 	public Producto getProdOfrecido() {
 		return prodOfrecido;
 	}
 	
-	/**
-	 * @return the prodPedido
-	 */
+
 	public Producto getProdPedido() {
 		return prodPedido;
 	}
+	*/
 
-	/**
-	 * @return the estadoPeticion
-	 */
 	public int getEstadoPeticion() {
 		return estadoPeticion;
 	}
@@ -136,6 +154,7 @@ public class Peticion {
 		this.valoracion = valoracion;
 	}
 	
+	//Codigo para generar id aleatorio
 	public static String randomCharArray(int len) {
 		String alphabet =
 				"ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -154,9 +173,6 @@ public class Peticion {
 	}
 
 
-	/**
-	 * @param estadoPeticion the estadoPeticion to set
-	 */
 
 	
 }

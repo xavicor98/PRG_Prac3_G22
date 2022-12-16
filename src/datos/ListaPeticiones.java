@@ -18,10 +18,19 @@ public class ListaPeticiones {
 		lista = new Peticion[50];
 	}
 
-	
-	public void crearPeticion(String id, Usuario proveedor, Usuario cliente, Producto productoPedido, Producto productoOfrecido) {
+	//TODO Hace falta controlar qeu ambos sean productos y no servicios
+	public void crearPeticion(String id, usuario proveedor, usuario cliente, Productos prodPedido, Productos prodOfrecido) {
 		
-		lista[nElementos] = new Peticion(id, proveedor, cliente, productoPedido, productoOfrecido);
+		lista[nElementos] = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		
+		nElementos++;
+		if(nElementos >= lista.length)
+			ampliarLista();
+	}
+	//TODO Hace falta controlar qeu ambos sean servicios y no productos
+	public void crearPeticion(String id, usuario proveedor, usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
+		
+		lista[nElementos] = new Peticion(id, proveedor, cliente, servicioPedido, servicioOfrecido);
 		
 		nElementos++;
 		if(nElementos >= lista.length)
@@ -76,16 +85,30 @@ public class ListaPeticiones {
 		
 		w.write(nElementos+";");
 		w.newLine();
+		
+		/*TODO crear getters para las peticiones
 		for(int i=0; i<nElementos; i++) {
-			w.write(lista[i].getEstadoPeticion()+";");
-			w.write(lista[i].getValoracion()+";");
-			w.write(lista[i].getId()+";");
-			w.write(lista[i].getProveedor().getnUsuario()+";");
-			w.write(lista[i].getCliente().getnUsuario()+";");
-			w.write(lista[i].getProdPedido().getnProducto()+";");
-			w.write(lista[i].getProdOfrecido().getnProducto()+";");
-			w.newLine();
+			if(lista[i].getProdPedido == null) {
+				w.write(lista[i].getEstadoPeticion()+";");
+				w.write(lista[i].getValoracion()+";");
+				w.write(lista[i].getId()+";");
+				w.write(lista[i].getProveedor().getnUsuario()+";");
+				w.write(lista[i].getCliente().getnUsuario()+";");
+				w.write(lista[i].getProdPedido().getnProducto()+";");
+				w.write(lista[i].getProdOfrecido().getnProducto()+";");
+				w.newLine();
+			}else {
+				w.write(lista[i].getEstadoPeticion()+";");
+				w.write(lista[i].getValoracion()+";");
+				w.write(lista[i].getId()+";");
+				w.write(lista[i].getProveedor().getnUsuario()+";");
+				w.write(lista[i].getCliente().getnUsuario()+";");
+				w.write(lista[i].getServicioPedido().getnProducto()+";");
+				w.write(lista[i].getServiciOfrecido().getnProducto()+";");
+				w.newLine();
+			}
 		}
+		*/
 		
 		w.close();
 	}
@@ -95,22 +118,24 @@ public class ListaPeticiones {
 		int nLineas;
 		String info;
 		ListaPeticiones result = new ListaPeticiones();
-
-		// La primera linea nos indica el numero de peticione que hay en el fichero
 		Scanner f = new Scanner(new File(nFichero));
 		nLineas = Integer.parseInt(f.nextLine()); 
 		
-		System.out.println("El archivo tiene "+nLineas+" peticiones");
+		/*TODO codigo para cargar todas las peticiones de un fichero
+		 * 
+		 * Primero lee el numero de peticiones guardadas
+		 * Un bucle lee linea por linea
+		 * En cada linea hay los id que se van a leer como strings y con esos
+		 * se va a cargar la informacion correspondiente mediante un método de busqueda
+		 * de la clase correspondiente
+		 * 
+		 * Una vez creada la peticion se añade a la lista
+		 * Asi hasta que se finaliza el bucle
+		 * 
+		 */
 		
-		for (int i = 0; i < nLineas; i++) {
-			info = f.nextLine();
-			String[] detalles = info.split(";");
-			Usuario proveedor = new Usuario(Integer.parseInt(detalles[2]));
-			Usuario cliente = new Usuario(Integer.parseInt(detalles[3]));
-
-			//Usuario proveedor = new Usuario(Integer.parseInt(detalles[1]));;
-			//Peticion peticion = new Peticion(nFichero, null, null, null, null)
-		}
+		
+		
 		f.close();
 		return null;
 	}
