@@ -7,21 +7,21 @@ public class main {
 	static Scanner key = new Scanner(System.in);
 	public static void main(String[] args) throws IOException {
 		int opcion;
-		ListaServicios LS = new ListaServicios(10);
-		ListaBienes LB = new ListaBienes(10);
+		ListaProductos LP = new ListaProductos(50);
+		
 		mostraMenu();
 		opcion = Integer.parseInt(key.nextLine());
 		boolean sal = false;
 		while (!sal) {
 			switch (opcion) {
 			case 1:
-				opcion1(LS,LB);
+				opcion1(LP);
 				break;
 			case 2:
-				opcion2(LS,LB);
+				opcion2(LP);
 				break;
 			case 3:
-				opcion3(LS,LB);
+				opcion3(LP);
 				break;
 			case 4:
 				opcion4();
@@ -30,16 +30,16 @@ public class main {
 				opcion5();
 				break;
 			case 6:
-				opcion6(LB);
+				opcion6(LP);
 				break;
 			case 7:
-				opcion7(LS);
+				opcion7(LP);
 				break;
 			case 8:
-				opcion8(LS,LB);
+				opcion8(LP);
 				break;
 			case 9:
-				salir(LS,LB);
+				salir(LP);
 				sal = true;
 				break;
 				}
@@ -52,7 +52,7 @@ public class main {
 		/* Habra submenus dentro del propio menu, aqui se crean todos los menus */
 		public static void mostraMenu() {
 			System.out.println("\n\nOpciones del menu:");
-			System.out.println("\n\t1. Añadir");
+			System.out.println("\n\t1. An1adir");
 			System.out.println("\t2. Listar");
 			System.out.println("\t3. Mostrar");
 			System.out.println("\t4. Aceptar o rechazar una peticion de intercambio");
@@ -93,17 +93,17 @@ public class main {
 			System.out.print("\n\t\t\tIndica una opcion:\n");
 		}
 		/* En la opcion 1 mostrara el primer submenu */
-		public static void opcion1(ListaServicios LS, ListaBienes LB) {
+		public static void opcion1(ListaProductos LP) {
 			int opcion;
 			mostraSubMenu1();
 			opcion = Integer.parseInt(key.nextLine());
 			while (opcion != 4) {
 				switch (opcion) {
 				case 1:
-					opcion1_1(LS);
+					opcion1_1(LP);
 					break;
 				case 2:
-					opcion2_1(LB);
+					opcion2_1(LP);
 					break;
 				case 3:
 					opcion3_1();
@@ -114,20 +114,20 @@ public class main {
 			}
 		}
 		/* En la opcion 2 mostrara el segundo submenu */
-		public static void opcion2(ListaServicios LS, ListaBienes LB) {
+		public static void opcion2(ListaProductos LP) {
 			int opcion;
 			mostraSubMenu2();
 			opcion = Integer.parseInt(key.nextLine());
 			while (opcion != 4) {
 				switch (opcion) {
 				case 1:
-					opcion1_2(LB, LS);
+					opcion1_2(LP);
 					break;
 				case 2:
-					opcion2_2(LS);
+					opcion2_2(LP);
 					break;
 				case 3:
-					opcion3_2(LB);
+					opcion3_2(LP);
 					break;
 				}
 				mostraSubMenu2();
@@ -135,7 +135,7 @@ public class main {
 			}
 		}
 		/* En la opcion 3 mostrara el tercer submenu */
-		public static void opcion3(ListaServicios LS, ListaBienes LB) {
+		public static void opcion3(ListaProductos LP) {
 			int opcion;
 			mostraSubMenu3();
 			opcion = Integer.parseInt(key.nextLine());
@@ -170,24 +170,24 @@ public class main {
 			
 		}
 		/* En la opcion 6 se elimina un bien de la lista de bienes */
-		public static void opcion6(ListaBienes b) {
+		public static void opcion6(ListaProductos LP) {
 			System.out.println("Que bien quieres eliminar?");
 			String b1 = key.nextLine();
-			b.BorrarBienes(b1);
+			LP.BorrarBienes(b1);
 		}
 		/* En la opcion 7 se desactiva un servicio de la lista de servicios */
-		public static void opcion7(ListaServicios s) {
+		public static void opcion7(ListaProductos LP) {
 			System.out.println("Que servicio quieres desactivar?");
 			String n=key.nextLine();
-			s.DesactivarServicio(n);
+			LP.DesactivarServicio(n);
 		}
 		/* En la opcion 8 se mostraran todas las listas (falta por poner la lista de servicios)*/
-		public static void opcion8(ListaServicios s, ListaBienes b) throws IOException {
-			s.LeerServicio();
-			b.LeerBien();
+		public static void opcion8(ListaProductos LP) throws IOException {
+			LP.LeerServicio();
+			LP.LeerBien();
 		}
 		/* En la opcion 1 del submenu 1 se crea un servicio en la lista de servicios */
-		public static void opcion1_1(ListaServicios s) {
+		public static void opcion1_1(ListaProductos LP) {
 			System.out.println("Introduce los datos del servicio\n");
 			System.out.println("Nombre:\n");
 			String n=key.nextLine();
@@ -201,11 +201,11 @@ public class main {
 			String[] d2 = f2.split("/");
 			Data D1 = new Data(Integer.parseInt(d1[0]),Integer.parseInt(d1[1]),Integer.parseInt(d1[2]));
 			Data D2 = new Data(Integer.parseInt(d2[0]),Integer.parseInt(d2[1]),Integer.parseInt(d2[2]));
-			Servicios s1 = new Servicios(n, d, D1, D2);
-			s.AnadirServicio(s1);
+			Productos p1 = new Servicios(n, d, D1, D2);
+			LP.AnadirProducto(p1);
 		}
 		/* En la opcion 2 del submenu 1 se crea un bien y se añade a la lista */
-		public static void opcion2_1(ListaBienes b) {
+		public static void opcion2_1(ListaProductos LP) {
 			System.out.println("Introduce los datos del bien\n");
 			System.out.println("Nombre:\n");
 			String n=key.nextLine();
@@ -227,33 +227,33 @@ public class main {
 			String[] d2 = f2.split("/");
 			Data D1 = new Data(Integer.parseInt(d1[0]),Integer.parseInt(d1[1]),Integer.parseInt(d1[2]));
 			Data D2 = new Data(Integer.parseInt(d2[0]),Integer.parseInt(d2[1]),Integer.parseInt(d2[2]));
-			Bienes b1 = new Bienes(n, d, D1, Integer.parseInt(am), Integer.parseInt(al), Integer.parseInt(pr), Integer.parseInt(ps), D2);
-			b.AnadirBienes(b1);
+			Productos p1 = new Bienes(n, d, D1, Integer.parseInt(am), Integer.parseInt(al), Integer.parseInt(pr), Integer.parseInt(ps), D2);
+			LP.AnadirProducto(p1);
 		}
 		
 		public static void opcion3_1() {
 			
 		}
 		/* En la opcion 1 del submenu 2 se listan la lista de bienes y la lista de servicios (falta poner la lista de peticiones)*/
-		public static void opcion1_2(ListaBienes b, ListaServicios s) {
-			System.out.println(b.toString());
-			System.out.println(s.toString());
+		public static void opcion1_2(ListaProductos LP) {
+			System.out.println(LP.toString());
+			System.out.println(LP.toString());
 		}
 		/* En la opcion 2 del submenu 2 se listan los servicios activos de la lista de servicios */
-		public static void opcion2_2(ListaServicios s) {
-			s.MostrarServicios();
+		public static void opcion2_2(ListaProductos LP) {
+			LP.MostrarProductos();
 		}
 		/* En la opcion 3 del submenu 3 se litan todos los bienes de la lista de bienes */
-		public static void opcion3_2(ListaBienes b) {
-			System.out.println(b.toString());
+		public static void opcion3_2(ListaProductos LP) {
+			LP.MostrarBienes();
 		}
 		/* Este metodo se usa para que cuando salgas del programa dar la opcion al usuario de que se guarde o no las modificaciones que haya hecho */
-		public static void salir(ListaServicios s, ListaBienes b) throws IOException {
+		public static void salir(ListaProductos LP) throws IOException {
 			System.out.println("Quieres guardar?");
 			String g = key.nextLine();
 			if (g.equalsIgnoreCase("Si")) {
-				s.EscribeServicio();
-				b.EscribeBien();
+				LP.EscribeServicio();
+				LP.EscribeBien();
 			}
 		}
 		
