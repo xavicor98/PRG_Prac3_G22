@@ -5,6 +5,9 @@ package datos;
 	import java.io.FileWriter;
 	import java.io.IOException;
 	import java.util.StringTokenizer;
+
+import excepciones.ListaLlena;
+
 	/* Programador: Eloi Cuevas Marcos */
 	public class ListaProductos{
 		private int numProductos;
@@ -27,17 +30,40 @@ package datos;
 			    return	aux;
 		}
 		
-		public void AnadirProducto(Productos p1) {
-			if (numProductos != lista.length) {
+		public void AnadirProducto(Productos p1) throws ListaLlena {
+			if (numProductos < lista.length) {
 				lista[numProductos]=p1;
 				numProductos++;
 				
 			}
-			else {
-				System.out.println("La lista esta llena");
+			else throw new ListaLlena(p1);{
+				
+				
 			}
 		}
+		public void AmpliarLista(Productos p1) {
+			Productos[] aux = new Productos[lista.length * 2];
+			for (int i = 0; i < numProductos; i++) 
+				aux[i] = lista[i];
+			lista = aux;
 		
+		int pos = numProductos-1;
+		while ((pos >= 0) ) {
+			lista[pos + 1] = lista[pos];
+			pos--;
+		} 
+		if(lista[pos+1] instanceof Servicios) {
+		lista[pos + 1] = ((Servicios)p1).copia();
+		}
+		
+		if(lista[pos+1] instanceof Bienes) {
+			lista[pos + 1] = ((Bienes)p1).copia();
+			numProductos++;
+			}
+		numProductos++;
+		}
+		
+	
 		public void MostrarProductos() {
 		int p=0;
 		   while(p<numProductos) {
@@ -108,10 +134,9 @@ package datos;
 			
 		}
 		
-		public void LeerServicio () throws IOException{
+		public void LeerServicio () throws IOException, ListaLlena{
 			BufferedReader f=new BufferedReader(new FileReader("Servicios.txt"));
 			String frase ;
-			int i=0;
 			frase=f.readLine();
 			while (frase!=null) {
 			System.out.println("Se ha leido la linea: "+ frase);
@@ -122,12 +147,24 @@ package datos;
 			String[] S2=st.nextToken().split("/");
 			boolean in=Boolean.parseBoolean(st.nextToken());
 			String e=st.nextToken();
-			Data d1=new Data(Integer.parseInt(S[0]),Integer.parseInt(S[1]),Integer.parseInt(S[2]));
-			Data d2=new Data(Integer.parseInt(S2[0]),Integer.parseInt(S2[1]),Integer.parseInt(S2[2]));
+			Data d1=new Data(0,0,0000) ;
+			Data d2 =new Data(0,0,0000 );
+			d1.setData(Integer.parseInt(S[0]), Integer.parseInt(S[1]), Integer.parseInt(S[2]));
+			d2.setData(Integer.parseInt(S2[0]), Integer.parseInt(S2[1]), Integer.parseInt(S2[2]));
 			Productos p=new Servicios(id, des, d1, d2);
-		    AnadirProducto(p);
-			((Servicios)p).setEstado(e);
-			((Servicios)p).setIntercanvioPrevio(in);
+			
+			try {
+				AnadirProducto(p);
+				((Servicios)p).setEstado(e);
+				((Servicios)p).setIntercanvioPrevio(in);
+				}catch(ListaLlena exc){
+					System.out.println(exc.toString());
+					AmpliarLista(p);
+					System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p.toString());
+				 
+				}
+		    
+			
 			
 			 frase=f.readLine();
 			}
@@ -149,10 +186,11 @@ package datos;
 			g.close();	
 		}
 		
-		public void LeerBien () throws IOException{
+		public void LeerBien () throws IOException, ListaLlena{
 			BufferedReader f=new BufferedReader(new FileReader("Bienes.txt"));
 			String frase ;
-			int i=0;
+			int d1=0,d2=0,d3=0;
+			double p=0;
 			frase=f.readLine();
 			while (frase!=null) {
 				System.out.println("Se ha leido la linea: "+ frase);
@@ -160,15 +198,30 @@ package datos;
 				String id=st.nextToken();
 				String des=st.nextToken();
 				String[] S=st.nextToken().split("/");
-				int d1=Integer.parseInt(st.nextToken());
-				int d2=Integer.parseInt(st.nextToken());
-				int d3=Integer.parseInt(st.nextToken());
-				int p=Integer.parseInt(st.nextToken());
+				try {
+				d1=Integer.parseInt(st.nextToken());
+			     d2=Integer.parseInt(st.nextToken());
+				 d3=Integer.parseInt(st.nextToken());
+				  p=Double.parseDouble(st.nextToken());
+				}catch(NumberFormatException e) {
+					System.out.println("Error de formato introducido, no se puede anadir:"+e);
+				}
+				
 				String[] S2=st.nextToken().split("/");
-				Data D1=new Data(Integer.parseInt(S[0]),Integer.parseInt(S[1]),Integer.parseInt(S[2]));
-				Data D2=new Data(Integer.parseInt(S2[0]),Integer.parseInt(S2[1]),Integer.parseInt(S2[2]));
+				Data D1=new Data(0,0,0000) ;
+				Data D2 =new Data(0,0,0000 );
+				D1.setData(Integer.parseInt(S[0]), Integer.parseInt(S[1]), Integer.parseInt(S[2]));
+				D2.setData(Integer.parseInt(S2[0]), Integer.parseInt(S2[1]), Integer.parseInt(S2[2]));
 				Productos B=new Bienes(id, des, D1, d1, d2, d3, p, D2);
-			    AnadirProducto(B);
+				
+				try {
+					AnadirProducto(B);
+					}catch(ListaLlena exc){
+						System.out.println(exc.toString());
+						AmpliarLista(B);
+						System.out.println("Hemos ampliado el tamaño de la lista i añadido "+B.toString());
+					}
+				
 				
 				frase=f.readLine();
 			}

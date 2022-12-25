@@ -40,6 +40,11 @@ public class Servicios extends Productos {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public Servicios copia() {
+		Servicios nova=new Servicios(this.getId(), this.getDes(), this.getDataOf(), FechaVigencia);
+		
+		return(nova);
+	}
 
 	public String toString() {
 		return "Servicio " + super.toString()+", FechaVigencia= "+ FechaVigencia + ", IntercanvioPrevio=" + IntercanvioPrevio+", estado="+estado+"]";

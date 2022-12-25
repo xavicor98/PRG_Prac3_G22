@@ -8,9 +8,9 @@ import java.io.IOException;
 /* Programador: Eloi Cuevas Marcos */
 public class Bienes extends Productos {
 	private int[] dimension; 
-	private int peso;
+	private double peso;
 	private Data intercanvio; 
-	public Bienes(String id,String de,Data d,int ampl,int alc,int fons,int p,Data inter) {
+	public Bienes(String id,String de,Data d,int ampl,int alc,int fons,double p,Data inter) {
 		super(id, de,d);
 		dimension  = new int[3]; 
 		dimension[0]=ampl;
@@ -28,7 +28,7 @@ public void setDimension(int[] dimension) {
 	this.dimension = dimension;
 }
 
-public int getPeso() {
+public double getPeso() {
 	return peso;
 }
 
@@ -43,6 +43,12 @@ public Data getIntercanvio() {
 public void setIntercanvio(Data intercanvio) {
 	this.intercanvio = intercanvio;
 }
+public Bienes copia() {
+	Bienes nova=new Bienes(this.getId(), this.getDes(), this.getDataOf(), dimension[0], dimension[1], dimension[2], peso, intercanvio);
+	
+	return(nova);
+}
+
 
 public String toString() {
 	return   "Bien "+super.toString()+", Amplitud=" + dimension[0]+", Altura="+dimension[1]+", Fondo="+dimension[2] + ", Peso="

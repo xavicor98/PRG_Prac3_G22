@@ -2,12 +2,14 @@ package aplicacion;
 import java.io.IOException;
 import java.util.Scanner;
 import datos.*;
+import excepciones.ListaLlena;
+
 /* Programador: Aitor Bernal Alcaraz */
 public class main {
 	static Scanner key = new Scanner(System.in);
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ListaLlena {
 		int opcion;
-		ListaProductos LP = new ListaProductos(50);
+		ListaProductos LP = new ListaProductos(1);
 		
 		mostraMenu();
 		opcion = Integer.parseInt(key.nextLine());
@@ -93,7 +95,7 @@ public class main {
 			System.out.print("\n\t\t\tIndica una opcion:\n");
 		}
 		/* En la opcion 1 mostrara el primer submenu */
-		public static void opcion1(ListaProductos LP) {
+		public static void opcion1(ListaProductos LP) throws ListaLlena {
 			int opcion;
 			mostraSubMenu1();
 			opcion = Integer.parseInt(key.nextLine());
@@ -182,12 +184,16 @@ public class main {
 			LP.DesactivarServicio(n);
 		}
 		/* En la opcion 8 se mostraran todas las listas (falta por poner la lista de servicios)*/
-		public static void opcion8(ListaProductos LP) throws IOException {
+		public static void opcion8(ListaProductos LP) throws IOException, ListaLlena {
 			LP.LeerServicio();
+			try {
 			LP.LeerBien();
+			}catch(NumberFormatException e) {
+				
+			}
 		}
 		/* En la opcion 1 del submenu 1 se crea un servicio en la lista de servicios */
-		public static void opcion1_1(ListaProductos LP) {
+		public static void opcion1_1(ListaProductos LP) throws ListaLlena {
 			System.out.println("Introduce los datos del servicio\n");
 			System.out.println("Nombre:\n");
 			String n=key.nextLine();
@@ -202,10 +208,18 @@ public class main {
 			Data D1 = new Data(Integer.parseInt(d1[0]),Integer.parseInt(d1[1]),Integer.parseInt(d1[2]));
 			Data D2 = new Data(Integer.parseInt(d2[0]),Integer.parseInt(d2[1]),Integer.parseInt(d2[2]));
 			Productos p1 = new Servicios(n, d, D1, D2);
+			try {
 			LP.AnadirProducto(p1);
+			}catch(ListaLlena exc){
+				System.out.println(exc.toString());
+				LP.AmpliarLista(p1);
+				System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p1.toString());
+			
+			}
 		}
+		
 		/* En la opcion 2 del submenu 1 se crea un bien y se aÃ±ade a la lista */
-		public static void opcion2_1(ListaProductos LP) {
+		public static void opcion2_1(ListaProductos LP) throws ListaLlena , NumberFormatException {
 			System.out.println("Introduce los datos del bien\n");
 			System.out.println("Nombre:\n");
 			String n=key.nextLine();
@@ -227,8 +241,15 @@ public class main {
 			String[] d2 = f2.split("/");
 			Data D1 = new Data(Integer.parseInt(d1[0]),Integer.parseInt(d1[1]),Integer.parseInt(d1[2]));
 			Data D2 = new Data(Integer.parseInt(d2[0]),Integer.parseInt(d2[1]),Integer.parseInt(d2[2]));
-			Productos p1 = new Bienes(n, d, D1, Integer.parseInt(am), Integer.parseInt(al), Integer.parseInt(pr), Integer.parseInt(ps), D2);
+			Productos p1 = new Bienes(n, d, D1, Integer.parseInt(am), Integer.parseInt(al), Integer.parseInt(pr), Double.parseDouble(ps), D2);
+			try {
 			LP.AnadirProducto(p1);
+			}catch(ListaLlena exc){
+				System.out.println(exc.toString());
+				LP.AmpliarLista(p1);
+				System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p1.toString());
+			}
+		
 		}
 		
 		public static void opcion3_1() {
@@ -237,7 +258,7 @@ public class main {
 		/* En la opcion 1 del submenu 2 se listan la lista de bienes y la lista de servicios (falta poner la lista de peticiones)*/
 		public static void opcion1_2(ListaProductos LP) {
 			System.out.println(LP.toString());
-			System.out.println(LP.toString());
+			
 		}
 		/* En la opcion 2 del submenu 2 se listan los servicios activos de la lista de servicios */
 		public static void opcion2_2(ListaProductos LP) {

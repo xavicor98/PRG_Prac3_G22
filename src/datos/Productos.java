@@ -42,6 +42,8 @@ public class Productos {
 	
 	}
 	
+	
+	
 	// To String
 	public String toString() {
 		return " [Id=" + Id + ", Descripcion=" + Descripcion + ", DataOferta=" + DataOferta ;
