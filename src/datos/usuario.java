@@ -40,6 +40,20 @@ public class usuario {
 	public void setCodigoPostal(String n) {
 		codigoPostal=n;
 	}
+
+
+//TODO revisar el codigo que te he añadido revisatelo y pon tu nombre
+
+	//Joan Cid
+	
+	public usuario copia() {
+		//No se se el orden es este 
+		return new usuario(alias, mail, codigoPostal, listaPo, listaInt);
+	}
+	
+	
+//TODO he comentado este cacho de codigo ya que no puedo compilar con errores ^^
+/*
 	public void anadirProductoO (producto p) {
 		if (nPo<listaPo.length) {
 			listaPo[nPo]=p;
@@ -50,9 +64,10 @@ public class usuario {
 			listaInt[nPi]=p;
 		}
 	}
+	
 	public String toString () {
 		return("[alias = "+ alias +", correo = "+ mail +", codigo postal = "+ codigoPostal +", productos que ofrece = "+ Arrays.toString(listaP) 
 		+", productos intercambiados = "+ Arrays.toString(listaInt) +"]");
 	}
-
+*/
 }

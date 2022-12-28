@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Bienes extends Productos {
 	private int[] dimension; 
 	private double peso;
-	private Data intercanvio; 
+	private Data intercambio; 
 	public Bienes(String id,String de,Data d,int ampl,int alc,int fons,double p,Data inter) {
 		super(id, de,d);
 		dimension  = new int[3]; 
@@ -17,7 +17,7 @@ public class Bienes extends Productos {
 		dimension[1]=alc;
 		dimension [2]=fons;
 		peso=p;
-		intercanvio=inter;
+		intercambio=inter;
  }
  
 public int getDimension(int i) {
@@ -37,14 +37,14 @@ public void setPeso(int peso) {
 }
 
 public Data getIntercanvio() {
-	return intercanvio;
+	return intercambio;
 }
 
 public void setIntercanvio(Data intercanvio) {
-	this.intercanvio = intercanvio;
+	this.intercambio = intercanvio;
 }
 public Bienes copia() {
-	Bienes nova=new Bienes(this.getId(), this.getDes(), this.getDataOf(), dimension[0], dimension[1], dimension[2], peso, intercanvio);
+	Bienes nova=new Bienes(this.getId(), this.getDes(), this.getDataOf(), dimension[0], dimension[1], dimension[2], peso, intercambio);
 	
 	return(nova);
 }
@@ -52,7 +52,7 @@ public Bienes copia() {
 
 public String toString() {
 	return   "Bien "+super.toString()+", Amplitud=" + dimension[0]+", Altura="+dimension[1]+", Fondo="+dimension[2] + ", Peso="
-			+ peso + ", Intercanvio=" + intercanvio + "]";
+			+ peso + ", Intercanvio=" + intercambio + "]";
 }
 
 

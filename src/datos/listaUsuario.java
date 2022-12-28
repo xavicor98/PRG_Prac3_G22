@@ -28,8 +28,25 @@ public class listaUsuario {
 			}
 			i++;
 		}
-		
 	}
 	
+	//TODO revisar el codigo que te he añadido revisatelo y pon tu nombre
+
+		//Joan Cid
+		
+	public usuario obtenerUsuario(String alias) {
+		usuario retorno = null;
+		int i =0;
+		while(retorno == null && !(i>nElems)) {
+			if(listaUsuario[i].getAlias().equalsIgnoreCase(alias)) {
+				retorno = listaUsuario[i].copia();
+			}
+			i++;
+		}
+		if(retorno ==null) {
+			//Excepcion para decir que no hay este usuario en la lista u algo del estilo
+		}
+		return retorno;
+	}
 
 }
