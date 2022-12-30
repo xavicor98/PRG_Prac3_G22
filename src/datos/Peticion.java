@@ -5,8 +5,8 @@ import java.util.Random;
 public class Peticion {
 	
 	private String id;
-	private usuario proveedor;
-	private usuario cliente;
+	private Usuario proveedor;
+	private Usuario cliente;
 	//Discernir entre productos
 	private Productos prodOfrecido;
 	private Productos prodPedido;
@@ -20,7 +20,7 @@ public class Peticion {
 
 	
 //Constructor en caso de pasarle un producto
-	public Peticion(String id, usuario proveedor, usuario cliente, Productos prodPedido, Productos prodOfrecido) {
+	public Peticion(String id, Usuario proveedor, Usuario cliente, Productos prodPedido, Productos prodOfrecido) {
 		this.id = randomCharArray(5);
 		this.proveedor = proveedor;
 		this.cliente = cliente;
@@ -29,7 +29,7 @@ public class Peticion {
 	}
 
 	//Constructor en caso de pasarle un servicio
-		public Peticion(String id, usuario proveedor, usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
+		public Peticion(String id, Usuario proveedor, Usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
 			this.id = randomCharArray(5);
 			this.proveedor = proveedor;
 			this.cliente = cliente;
@@ -46,7 +46,7 @@ public class Peticion {
 		estadoPeticion = -1;
 	}
 	
-	
+	//TODO revisar esto
 	//devuelve una copia de la peticion dependiendo si contiene un servicio o un bien
 	protected Peticion copia() {
 		if(servicioPedido == null)

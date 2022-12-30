@@ -1,52 +1,49 @@
 package datos;
 /* Programador: Francisco Manuel Gonzalez Ortegon */
 public class listaUsuario {
-	private usuario[] listaUsuario;
-	private int nElems;
+	private int nElementos;
+	private Usuario[] listaUsuarios;
 	
-	public listaUsuario (int n) {
-		nElems = 0;
-		listaUsuario = new usuario[n];
+	public listaUsuario() {
 		
+		listaUsuarios = new Usuario [20];
 	}
-	public void anadirUsuario (usuario user) {
-		if (nElems<listaUsuario.length) {
-			listaUsuario[nElems] = user;
-			nElems ++;
+	
+	
+	public void anadirUsuario(Usuario usuario) {
+		listaUsuarios[nElementos] = usuario.copia();
+		nElementos++;
+		if(nElementos >listaUsuarios.length) {
+			ampliaLista();
 		}
 	}
-	public void borrarUsuario(usuario user) {
-		boolean encontrado = false;
+	
+	//TODO si hace fata otro constructor en caso de no tener una instancia de usuario ya se creara uno nuevo
+	
+	private void ampliaLista() {
+		Usuario[] temp = new Usuario[listaUsuarios.length+20];
+		
+		for(int i = 0; i<listaUsuarios.length; i++) 
+			temp[i] = listaUsuarios[i].copia();
+		
+		listaUsuarios = temp;
+		
+	}
+
+
+	public int  buscaUsuario(String alias) {
 		int i=0;
-		while (!encontrado && i<nElems) {
-			
-			if (user.getAlias().equals(listaUsuario[i].getAlias())) {
-				for (int j=i; i<nElems; j++)
-				listaUsuario[j]=listaUsuario[j+1];
-				encontrado = true;
-				
-			}
-			i++;
+		boolean trobat = false;
+		while(i<nElementos && trobat == false) {
+			if(listaUsuarios[i].esEsteAlias(alias))
+				trobat = true;
+			else
+				i++;
 		}
-	}
-	
-	//TODO revisar el codigo que te he añadido revisatelo y pon tu nombre
-
-		//Joan Cid
+		if(i==nElementos)
+			i=-1;
 		
-	public usuario obtenerUsuario(String alias) {
-		usuario retorno = null;
-		int i =0;
-		while(retorno == null && !(i>nElems)) {
-			if(listaUsuario[i].getAlias().equalsIgnoreCase(alias)) {
-				retorno = listaUsuario[i].copia();
-			}
-			i++;
-		}
-		if(retorno ==null) {
-			//Excepcion para decir que no hay este usuario en la lista u algo del estilo
-		}
-		return retorno;
+		return i;
 	}
-
 }
+	

@@ -51,7 +51,7 @@ public class InterficieGrafica extends JFrame {
 	    c.anchor = GridBagConstraints.EAST;
 	    add(botonCargar, c);
 	    c.gridx = 0;
-	    c.gridy = 1;
+	    c.gridy = 2;
 	    c.anchor = GridBagConstraints.WEST;
 	    add(opcion2, c);
 	    c.gridx = 1;

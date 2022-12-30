@@ -19,7 +19,7 @@ public class ListaPeticiones {
 	}
 
 	//TODO Hace falta controlar qeu ambos sean productos y no servicios
-	public void crearPeticion(String id, usuario proveedor, usuario cliente, Productos prodPedido, Productos prodOfrecido) {
+	public void crearPeticion(String id, Usuario proveedor, Usuario cliente, Productos prodPedido, Productos prodOfrecido) {
 		
 		lista[nElementos] = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
 		
@@ -28,7 +28,7 @@ public class ListaPeticiones {
 			ampliarLista();
 	}
 	//TODO Hace falta controlar qeu ambos sean servicios y no productos
-	public void crearPeticion(String id, usuario proveedor, usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
+	public void crearPeticion(String id, Usuario proveedor, Usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
 		
 		lista[nElementos] = new Peticion(id, proveedor, cliente, servicioPedido, servicioOfrecido);
 		
