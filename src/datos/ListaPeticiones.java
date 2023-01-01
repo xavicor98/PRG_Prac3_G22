@@ -117,6 +117,7 @@ public class ListaPeticiones {
 	private ListaPeticiones llegirLiniesFitxer(String nFichero) throws FileNotFoundException {
 		int nLineas;
 		String info;
+		
 		ListaPeticiones result = new ListaPeticiones();
 		Scanner f = new Scanner(new File(nFichero));
 		nLineas = Integer.parseInt(f.nextLine()); 

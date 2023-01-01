@@ -74,6 +74,36 @@ public class Usuario {
 		return cp;
 	}
 	
+	/**
+	 * @return el nProductos
+	 */
+	public int getnProductos() {
+		return nProductos;
+	}
+	
+	/**
+	 * @return el nPeticiones
+	 */
+	public int getnPeticiones() {
+		return nPeticiones;
+	}
+	
+	/**
+	 * @return el id de la peticion i
+	 */
+	public String getPeticionI(int i) {
+		return peticiones[i].getId();
+	}
+	
+	/**
+	 * @return el id del prodcto i
+	 */
+	//TODO una vez tenga la clase productos hare
+	public String getProductoI(int i) {
+		//return productos[i].getId();
+		return "producto";
+	}
+	
 	//si no dejan genéricos ni java.array tengo que crear dos clases para cada tipo de lista
 	
 	private void ampliaPeticiones() {
