@@ -114,9 +114,7 @@ public class Peticion {
 	public String getId() {
 		return id;
 	}
-	/* TODO codigo pendiente de revision
-	 * 
-	 *
+
 
 	public Usuario getProveedor() {
 		return proveedor;
@@ -127,7 +125,9 @@ public class Peticion {
 		return cliente;
 	}
 
-
+	/* TODO codigo pendiente de revision
+	 * 
+	 *
 	public Producto getProdOfrecido() {
 		return prodOfrecido;
 	}

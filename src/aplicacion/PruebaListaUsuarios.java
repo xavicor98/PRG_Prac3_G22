@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.Random;
 
 import datos.Usuario;
-import datos.listaUsuario;
+import datos.ListaUsuarios;
 
 public class PruebaListaUsuarios {
 
 	public static void main(String[] args) throws IOException {
 		
-		listaUsuario listausuarios = new listaUsuario();
+		ListaUsuarios listausuarios = new ListaUsuarios();
 		
 		for(int i=0; i<50;i++) {
 			Usuario usuario = new Usuario(generateRandomString(), null, i);

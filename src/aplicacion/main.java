@@ -9,8 +9,14 @@ public class main {
 	static Scanner key = new Scanner(System.in);
 	public static void main(String[] args) throws IOException, ListaLlena {
 		int opcion;
-		ListaProductos LP = new ListaProductos(1);
+		ListaProductos LP = new ListaProductos();
 		
+		for(int i=0; i<50; i++) {
+			  Productos producto = new Productos("Producto"+i, ""+i, null);
+			  LP.AnadirProducto(producto);
+		}
+
+/*
 		mostraMenu();
 		opcion = Integer.parseInt(key.nextLine());
 		boolean sal = false;
@@ -50,6 +56,7 @@ public class main {
 				opcion = Integer.parseInt(key.nextLine()); 
 				}
 			}
+*/
 		}
 		/* Habra submenus dentro del propio menu, aqui se crean todos los menus */
 		public static void mostraMenu() {
@@ -213,7 +220,7 @@ public class main {
 			}catch(ListaLlena exc){
 				System.out.println(exc.toString());
 				LP.AmpliarLista(p1);
-				System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p1.toString());
+				System.out.println("Hemos ampliado el tamaï¿½o de la lista i aï¿½adido "+p1.toString());
 			
 			}
 		}
@@ -247,7 +254,7 @@ public class main {
 			}catch(ListaLlena exc){
 				System.out.println(exc.toString());
 				LP.AmpliarLista(p1);
-				System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p1.toString());
+				System.out.println("Hemos ampliado el tamaï¿½o de la lista i aï¿½adido "+p1.toString());
 			}
 		
 		}

@@ -3,15 +3,15 @@
 /* Programador: Joan Ignasi Cid guardia */
 
 public class Usuario {
-	String alias;
-	String correo;
-	int cp;
+	private String alias;
+	private String correo;
+	private int cp;
 	
 	//Lista de productos
-	int nProductos;
+	private int nProductos;
 	
-	Peticion[] peticiones;
-	int nPeticiones;
+	private Peticion[] peticiones;
+	private int nPeticiones;
 	
 	public Usuario(String alias, String correo, int cp) {
 		this.alias = alias;

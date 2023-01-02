@@ -3,11 +3,11 @@ package datos;
 import java.io.*;
 
 /* Programador: Francisco Manuel Gonzalez Ortegon */
-public class listaUsuario {
+public class ListaUsuarios {
 	private int nElementos;
 	private Usuario[] listaUsuarios;
 	
-	public listaUsuario() {
+	public ListaUsuarios() {
 		
 		listaUsuarios = new Usuario [20];
 	}

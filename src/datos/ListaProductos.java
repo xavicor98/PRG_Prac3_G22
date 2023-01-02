@@ -13,8 +13,8 @@ import excepciones.ListaLlena;
 		private int numProductos;
 		private Productos[] lista;
 		
-		public ListaProductos(int n) {
-			lista = new Productos[n];
+		public ListaProductos() {
+			lista = new Productos[50];
 		}
 		
 		public int getNumProductos() {
@@ -160,7 +160,7 @@ import excepciones.ListaLlena;
 				}catch(ListaLlena exc){
 					System.out.println(exc.toString());
 					AmpliarLista(p);
-					System.out.println("Hemos ampliado el tamaño de la lista i añadido "+p.toString());
+					System.out.println("Hemos ampliado el tamaï¿½o de la lista i aï¿½adido "+p.toString());
 				 
 				}
 		    
@@ -219,13 +219,25 @@ import excepciones.ListaLlena;
 					}catch(ListaLlena exc){
 						System.out.println(exc.toString());
 						AmpliarLista(B);
-						System.out.println("Hemos ampliado el tamaño de la lista i añadido "+B.toString());
+						System.out.println("Hemos ampliado el tamaï¿½o de la lista i aï¿½adido "+B.toString());
 					}
 				
 				
 				frase=f.readLine();
 			}
 			f.close();
+		}
+		
+		public String getInfoLista() {
+			String listaProductos = "";
+			
+			for(int i=0; i<numProductos; i++) {
+				listaProductos += (lista[i].getId()+"\n"+
+						lista[i].getDes()+"\n"+
+						"\n");
+			}
+			
+			return listaProductos;
 		}
 	}
 

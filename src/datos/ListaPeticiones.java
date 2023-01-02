@@ -114,7 +114,7 @@ public class ListaPeticiones {
 	}
 	
 	//Lee de un archivo y devuelve una lista de peticiones
-	private ListaPeticiones llegirLiniesFitxer(String nFichero) throws FileNotFoundException {
+	public void leerFichero(String nFichero) throws FileNotFoundException {
 		int nLineas;
 		String info;
 		
@@ -138,7 +138,6 @@ public class ListaPeticiones {
 		
 		
 		f.close();
-		return null;
 	}
 	
 	@Override
@@ -150,6 +149,9 @@ public class ListaPeticiones {
 		}
 		return retorn;
 	}
+	
+
+	
 }
 	
 
