@@ -16,7 +16,7 @@ public class main {
 			  LP.AnadirProducto(producto);
 		}
 
-/*
+
 		mostraMenu();
 		opcion = Integer.parseInt(key.nextLine());
 		boolean sal = false;
@@ -56,12 +56,12 @@ public class main {
 				opcion = Integer.parseInt(key.nextLine()); 
 				}
 			}
-*/
+
 		}
 		/* Habra submenus dentro del propio menu, aqui se crean todos los menus */
 		public static void mostraMenu() {
 			System.out.println("\n\nOpciones del menu:");
-			System.out.println("\n\t1. An1adir");
+			System.out.println("\n\t1. Anadir");
 			System.out.println("\t2. Listar");
 			System.out.println("\t3. Mostrar");
 			System.out.println("\t4. Aceptar o rechazar una peticion de intercambio");

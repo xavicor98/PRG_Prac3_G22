@@ -10,7 +10,7 @@ import excepciones.ListaLlena;
 
 	/* Programador: Eloi Cuevas Marcos */
 	public class ListaProductos{
-		private int numProductos;
+		private int numProductos=0;
 		private Productos[] lista;
 		
 		public ListaProductos() {
@@ -160,7 +160,7 @@ import excepciones.ListaLlena;
 				}catch(ListaLlena exc){
 					System.out.println(exc.toString());
 					AmpliarLista(p);
-					System.out.println("Hemos ampliado el tama�o de la lista i a�adido "+p.toString());
+					System.out.println("Hemos ampliado el tamano de la lista i anadido "+p.toString());
 				 
 				}
 		    
@@ -176,7 +176,7 @@ import excepciones.ListaLlena;
 			int i=0;
 			while(i<numProductos) {
 				if (lista[i] instanceof Bienes) {
-				String frase=lista[i].getId()+";"+lista[i].getDes()+";"+lista[i].getDataOf()+";"+((Bienes)lista[i]).getDimension(0)+";"+((Bienes)lista[i]).getDimension(1)+";"+((Bienes)lista[i]).getDimension(2)+";"+((Bienes)lista[i]).getPeso()+";"+((Bienes)lista[i]).getIntercanvio();
+				String frase=lista[i].getId()+";"+lista[i].getDes()+";"+lista[i].getDataOf()+";"+((Bienes)lista[i]).getDimension(0)+";"+((Bienes)lista[i]).getDimension(1)+";"+((Bienes)lista[i]).getDimension(2)+";"+((Bienes)lista[i]).getPeso()+";"+((Bienes)lista[i]).getIntercambio();
 				System.out.println("Se ha escrito la linea: "+ lista[i]);
 			    g.write(frase);
 			    g.newLine();

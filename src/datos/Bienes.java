@@ -36,12 +36,12 @@ public void setPeso(int peso) {
 	this.peso = peso;
 }
 
-public Data getIntercanvio() {
+public Data getIntercambio() {
 	return intercambio;
 }
 
-public void setIntercanvio(Data intercanvio) {
-	this.intercambio = intercanvio;
+public void setIntercanvio(Data intercambio) {
+	this.intercambio = intercambio;
 }
 public Bienes copia() {
 	Bienes nova=new Bienes(this.getId(), this.getDes(), this.getDataOf(), dimension[0], dimension[1], dimension[2], peso, intercambio);

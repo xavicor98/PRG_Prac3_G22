@@ -7,30 +7,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 /* Programador: Eloi Cuevas Marcos */
 public class Servicios extends Productos {
-	private Data FechaVigencia;
-	private boolean IntercanvioPrevio;
+	private Data fechaVigencia;
+	private boolean intercanvioPrevio;
 	protected  String estado;
-	public Servicios(String id,String de,Data d,Data FechaVi) {
-		super(id, de,d );
-		FechaVigencia = FechaVi;
-		IntercanvioPrevio = false;
+	public Servicios(String id,String desc,Data d,Data fechaVi) {
+		super(id, desc,d );
+		fechaVigencia = fechaVi;
+		intercanvioPrevio = false;
 		estado="Activo";
 	}
 
 	public Data getFechaVigencia() {
-		return FechaVigencia;
+		return fechaVigencia;
 	}
 
 	public void setFechaVigencia(Data fechaVigencia) {
-		FechaVigencia = fechaVigencia;
+		this.fechaVigencia = fechaVigencia;
 	}
 
 	public boolean getIntercanvioPrevio() {
-		return IntercanvioPrevio;
+		return intercanvioPrevio;
 	}
 
 	public void setIntercanvioPrevio(boolean intercanvioPrevio) {
-		IntercanvioPrevio = intercanvioPrevio;
+		this.intercanvioPrevio = intercanvioPrevio;
 	}
 
 	public String getEstado() {
@@ -41,12 +41,12 @@ public class Servicios extends Productos {
 		this.estado = estado;
 	}
 	public Servicios copia() {
-		Servicios nova=new Servicios(this.getId(), this.getDes(), this.getDataOf(), FechaVigencia);
+		Servicios nova=new Servicios(this.getId(), this.getDes(), this.getDataOf(), fechaVigencia);
 		
 		return(nova);
 	}
 
 	public String toString() {
-		return "Servicio " + super.toString()+", FechaVigencia= "+ FechaVigencia + ", IntercanvioPrevio=" + IntercanvioPrevio+", estado="+estado+"]";
+		return "Servicio " + super.toString()+", FechaVigencia= "+ fechaVigencia + ", IntercanvioPrevio=" + intercanvioPrevio+", estado="+estado+"]";
 	}
 }

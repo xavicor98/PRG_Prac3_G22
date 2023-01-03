@@ -6,39 +6,39 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Productos {
-	private String Id;
-	private String Descripcion;
-	private Data DataOferta;
+	private String id;
+	private String descripcion;
+	private Data dataOferta;
 	
-	public Productos (String Id, String Des, Data DataOf) {
-		this.Id = Id;
-		Descripcion = Des;
-		DataOferta = DataOf;
+	public Productos (String id, String des, Data dataOf) {
+		this.id = id;
+		descripcion = des;
+		dataOferta = dataOf;
 		
 	}
 	// Getters
 	public String getId() {
-		return Id;
+		return  id;
 	}
 	
 	public String getDes() {
-		return Descripcion;
+		return descripcion;
 	}
 	
 	public Data getDataOf() {
-		return DataOferta;
+		return dataOferta;
 	}
 	// Setters
-	public void setId(String Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	public void setDes(String Des) {
-		Descripcion = Des;
+	public void setDes(String des) {
+		descripcion = des;
 	}
 	
-	public void setDataOf(Data DataOf) {
-		DataOferta = DataOf;
+	public void setDataOf(Data dataOf) {
+		dataOferta = dataOf;
 	
 	}
 	
@@ -46,7 +46,7 @@ public class Productos {
 	
 	// To String
 	public String toString() {
-		return " [Id=" + Id + ", Descripcion=" + Descripcion + ", DataOferta=" + DataOferta ;
+		return " [Id=" + id + ", Descripcion=" + descripcion + ", DataOferta=" + dataOferta ;
 	}
 	
 	}
