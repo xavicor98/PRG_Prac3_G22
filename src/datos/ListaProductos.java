@@ -233,7 +233,7 @@ import excepciones.ListaLlena;
 			
 			for(int i=0; i<numProductos; i++) {
 				listaProductos += (lista[i].getId()+"\n"+
-						lista[i].getDes()+"\n"+
+						lista[i].getDes()+";\n"+
 						"\n");
 			}
 			

@@ -15,6 +15,8 @@ import excepciones.ListaLlena;
 
 public class VentanaGrafica extends JFrame {
 	
+	//TODO generar un archivo para hacer juego de pruebasm revisar clase usuarios y clase productos
+	
 	ListaProductos listaProductos = new ListaProductos();
 	ListaUsuarios listaUsuarios = new ListaUsuarios();
 	ListaPeticiones listaPeticiones = new ListaPeticiones();
@@ -30,25 +32,23 @@ public class VentanaGrafica extends JFrame {
 		 //Cargar Usuarios
 		 listaPeticiones.leerFichero(getName());
 		 */
+		  //Creo temporalmente una lista de productos
 		  for(int i=0; i<50;i++) {
-			  Productos producto = new Productos("Producto"+i, ""+i, null);
+			  Productos producto = new Productos("Producto:"+i, ""+i, null);
 			  listaProductos.AnadirProducto(producto);
 		  }
-		//Inicializar ventana
-	    
+		  
+		//Inicializar ventana<	    
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setLayout(new FlowLayout(FlowLayout.LEFT));	   
+	    setLayout(new BorderLayout());	   
 	    
-	    JLabel usuario = new JLabel("Bienvenido, " +  pideNombre());
+	    JLabel usuario = new JLabel("Bienvenido, " +  pideNombre()+", Seleccione un producto de la lista");
 	    
-	    //Boton para ver la lista de productos
-	    JButton verLista = new JButton("Ver lista de productos");
-	    verLista.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	          mostrarLista(); // Llamada a la función mostrarLista
-	        }
-	      });
+	    JComboBox<String> desplegableProductos = new JComboBox<>();
+	    String[] stringProductos = obtenerOfertas();
+	   
+	    for(int i=0; i<stringProductos.length; i++)
+	    	desplegableProductos.addItem(stringProductos[i]);
 	    		
 	    //Boton para cambiar el nombre del usuario
 	    JButton cambiarNombre = new JButton("CambiarNombre");
@@ -59,10 +59,10 @@ public class VentanaGrafica extends JFrame {
 	        }
 	      });
 	    
-	    add(usuario, BorderLayout.BEFORE_FIRST_LINE);
-	    add(verLista, BorderLayout.EAST);
-	    add(cambiarNombre, BorderLayout.SOUTH);	
-
+	    add(usuario, BorderLayout.PAGE_START);
+	    add(cambiarNombre, BorderLayout.PAGE_END);	
+	    add(desplegableProductos, BorderLayout.LINE_START);
+	    
 	  }
 	  
 	 
@@ -74,13 +74,10 @@ public class VentanaGrafica extends JFrame {
 		   return nombre;
 	  }
 	  
-	  private void mostrarLista() {
-		    JOptionPane optionPane = new JOptionPane(obtenerOfertas(), JOptionPane.PLAIN_MESSAGE);
-		    optionPane.createDialog("Lista de ofertas").setVisible(true);
-	  }
+
 	  
-	  private String obtenerOfertas() {
-		  return listaProductos.getInfoLista();
+	  private String[] obtenerOfertas() {
+		  return listaProductos.getInfoLista().split(";");
 	  }
 	  
 }

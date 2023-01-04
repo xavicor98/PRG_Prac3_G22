@@ -11,7 +11,7 @@ public class Productos {
 	private Data dataOferta;
 	
 	public Productos (String id, String des, Data dataOf) {
-		this.id = id;
+		this.id = id +" ";
 		descripcion = des;
 		dataOferta = dataOf;
 		
