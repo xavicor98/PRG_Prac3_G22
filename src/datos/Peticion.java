@@ -5,14 +5,14 @@ import java.util.Random;
 public class Peticion {
 	
 	private String id;
-	private Usuario proveedor;
-	private Usuario cliente;
+	private String proveedor;
+	private String cliente;
 	//Discernir entre productos
-	private Productos prodOfrecido;
-	private Productos prodPedido;
+	private String prodOfrecido;
+	private String prodPedido;
 	//Y servicios
-	private Servicios servicioOfrecido;
-	private Servicios servicioPedido;
+	private String servicioOfrecido;
+	private String servicioPedido;
 	
 	private int estadoPeticion = 0;
 	private int valoracion;
@@ -20,7 +20,7 @@ public class Peticion {
 
 	
 //Constructor en caso de pasarle un producto
-	public Peticion(String id, Usuario proveedor, Usuario cliente, Productos prodPedido, Productos prodOfrecido) {
+	public Peticion(String id, String proveedor, String cliente, String prodPedido, String prodOfrecido) {
 		this.id = randomCharArray(5);
 		this.proveedor = proveedor;
 		this.cliente = cliente;
@@ -28,14 +28,7 @@ public class Peticion {
 		this.prodOfrecido = prodOfrecido;
 	}
 
-	//Constructor en caso de pasarle un servicio
-		public Peticion(String id, Usuario proveedor, Usuario cliente, Servicios servicioPedido, Servicios servicioOfrecido) {
-			this.id = randomCharArray(5);
-			this.proveedor = proveedor;
-			this.cliente = cliente;
-			this.servicioPedido = servicioPedido;
-			this.servicioOfrecido = servicioOfrecido;
-		}
+
 	//Rechaza la peticion
 	public void acepta() {
 		estadoPeticion = 1;
@@ -46,67 +39,10 @@ public class Peticion {
 		estadoPeticion = -1;
 	}
 	
-	//TODO revisar esto
-	//devuelve una copia de la peticion dependiendo si contiene un servicio o un bien
-	protected Peticion copia() {
-		if(servicioPedido == null)
-			return new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
-		else {
-			return new Peticion(id, proveedor, cliente, servicioPedido, servicioOfrecido);
-		}
-	}
-
-	@Override
-	public String toString() {
-		String infoEstado = "";
-		String retorno = "";;
-		switch (estadoPeticion) {
-			case -1: {
-				infoEstado = "no aceptada";
-				break;
-			}
-			case -2:{
-				infoEstado = "peticion publicada y no visualizada";
-				break;
-			}
-			case 0: {
-				infoEstado = "peticion visualizada";
-
-				break;
-			}
-			case 1: {
-				infoEstado = "aceptada";
-				break;
-			}
-		}
-		if(servicioPedido == null) {
-			retorno= "Peticion con id= "+ id +" "+infoEstado +
-					"\n\tcliente=" + cliente.getAlias() + 
-					"\n\tservicioPedido=" + prodPedido.getId()+
-					"\n\tproveedor=" + proveedor.getAlias() + 
-					"\n\tservicioPedido=" + prodOfrecido.getId() +
-					retorno;
-		}else {
-			retorno= "Peticion con id= "+ id +" "+infoEstado +
-					"\n\tcliente=" + cliente.getAlias() + 
-					"\n\tprodPedido=" + servicioPedido.getId()+
-					"\n\tproveedor=" + proveedor.getAlias() + 
-					"\n\tprodOfrecido=" + servicioPedido.getId() +
-					retorno;
-		}
-		
 
 
 
-		return retorno;
-	}
 
-	/**
-	 * @return comparador de id del producto, devuelve true si es igual
-	 */
-	public boolean esEsteId(String id) {
-		return id.equalsIgnoreCase(prodOfrecido.getId());
-	}
 	
 	/**
 	 * @return the id
@@ -115,29 +51,22 @@ public class Peticion {
 		return id;
 	}
 
-
-	public Usuario getProveedor() {
+	public String getProveedor() {
 		return proveedor;
 	}
 
-
-	public Usuario getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
 
-	/* TODO codigo pendiente de revision
-	 * 
-	 *
-	public Producto getProdOfrecido() {
+	public String getProdOfrecido() {
 		return prodOfrecido;
 	}
 	
-
-	public Producto getProdPedido() {
+	public String getProdPedido() {
 		return prodPedido;
 	}
-	*/
-
+	
 	public int getEstadoPeticion() {
 		return estadoPeticion;
 	}
@@ -154,6 +83,29 @@ public class Peticion {
 		this.valoracion = valoracion;
 	}
 	
+
+	@Override
+	public String toString() {
+		String retorno = "";
+		
+		try {
+			retorno = "Peticion:"
+					+ "id=" + id 
+					+ ", proveedor=" + proveedor
+					+ ", cliente=" + cliente
+					+ ", prodOfrecido="	+ prodOfrecido 
+					+ ", prodPedido=" + prodPedido 
+					+ ", servicioOfrecido=" + servicioOfrecido
+					+ ", servicioPedido=" + servicioPedido 
+					+ ", estadoPeticion=" + estadoPeticion 
+					+ ", valoracion="+ valoracion;
+		} catch (Exception e) {
+			System.out.println("En la peticion: "+id+" hace falta informacion");
+		}
+		
+		return retorno;
+	}
+
 	//Codigo para generar id aleatorio
 	public static String randomCharArray(int len) {
 		String alphabet =
@@ -172,7 +124,42 @@ public class Peticion {
 		return b.toString();
 	}
 
+	
+	public String getSerializado() {
+		String retorno ="";
+		
+		try {
+			retorno = (
+							id+";"
+							+proveedor+";"
+							+cliente+";"
+							+prodOfrecido+";"
+							+prodPedido+";"
+							+servicioOfrecido+";"
+							+servicioPedido+";"
+							+estadoPeticion+";"
+							+valoracion
 
+					);
+					
+		} catch (Exception e) {
+			System.out.println("En la peticion: "+id+" hace falta informacion");
+		}
+		
+		return retorno;
+	}
+
+
+	public Peticion copia() {
+		Peticion retorno = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		return retorno;
+	}
+
+
+	public boolean esEsteId(String id2) {
+		
+		return this.id.equalsIgnoreCase(id2);
+	}
 
 	
 }

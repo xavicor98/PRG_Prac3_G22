@@ -98,6 +98,7 @@ public class Usuario {
 	/**
 	 * @return el id del prodcto i
 	 */
+	
 	//TODO una vez tenga la clase productos hare
 	public String getProductoI(int i) {
 		//return productos[i].getId();
@@ -115,6 +116,13 @@ public class Usuario {
 		
 		peticiones = nuevaLista;
 	}
+
+	public static Peticion getUsuario(String proveedor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
+
 	//lo mismo para la lista de productos
 }

@@ -48,6 +48,10 @@ public class Productos {
 	public String toString() {
 		return " [Id=" + id + ", Descripcion=" + descripcion + ", DataOferta=" + dataOferta ;
 	}
+	public static String getProducto(String prodOfrecido) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	}
 
