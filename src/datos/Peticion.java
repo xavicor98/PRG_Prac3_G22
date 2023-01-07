@@ -21,7 +21,7 @@ public class Peticion {
 	
 //Constructor en caso de pasarle un producto
 	public Peticion(String id, String proveedor, String cliente, String prodPedido, String prodOfrecido) {
-		this.id = randomCharArray(5);
+		this.id = id;
 		this.proveedor = proveedor;
 		this.cliente = cliente;
 		this.prodPedido = prodPedido;
@@ -106,7 +106,8 @@ public class Peticion {
 		return retorno;
 	}
 
-	//Codigo para generar id aleatorio
+/**	No hace falta generar un id aleatorio porque el id lo pone el usuario.
+ 	//Codigo para generar id aleatorio
 	public static String randomCharArray(int len) {
 		String alphabet =
 				"ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -123,7 +124,7 @@ public class Peticion {
 
 		return b.toString();
 	}
-
+**/
 	
 	public String getSerializado() {
 		String retorno ="";

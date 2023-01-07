@@ -10,6 +10,8 @@ public class main {
 	public static void main(String[] args) throws IOException, ListaLlena {
 		int opcion;
 		ListaProductos LP = new ListaProductos();
+		ListaPeticiones LPet = new ListaPeticiones();
+		ListaUsuarios LU = new ListaUsuarios();
 		
 		for(int i=0; i<50; i++) {
 			  Productos producto = new Productos("Producto"+i, ""+i, null);
@@ -23,7 +25,7 @@ public class main {
 		while (!sal) {
 			switch (opcion) {
 			case 1:
-				opcion1(LP);
+				opcion1(LP,LPet);
 				break;
 			case 2:
 				opcion2(LP);
@@ -32,10 +34,10 @@ public class main {
 				opcion3(LP);
 				break;
 			case 4:
-				opcion4();
+				opcion4(LPet);
 				break;
 			case 5:
-				opcion5();
+				opcion5(LU);
 				break;
 			case 6:
 				opcion6(LP);
@@ -102,7 +104,7 @@ public class main {
 			System.out.print("\n\t\t\tIndica una opcion:\n");
 		}
 		/* En la opcion 1 mostrara el primer submenu */
-		public static void opcion1(ListaProductos LP) throws ListaLlena {
+		public static void opcion1(ListaProductos LP, ListaPeticiones LPet) throws ListaLlena {
 			int opcion;
 			mostraSubMenu1();
 			opcion = Integer.parseInt(key.nextLine());
@@ -115,7 +117,7 @@ public class main {
 					opcion2_1(LP);
 					break;
 				case 3:
-					opcion3_1();
+					opcion3_1(LPet);
 					break;
 				}
 				mostraSubMenu1();
@@ -170,13 +172,33 @@ public class main {
 				opcion = Integer.parseInt(key.nextLine());
 			}
 		}
-		
-		public static void opcion4() {
+		/** En la opcion 4 se acepta o se rechaza una peticion a partir de su id **/
+		public static void opcion4(ListaPeticiones LPet) {
+			System.out.println(LPet.toString());
+			System.out.println("Que peticion quieres aceptar o rechazar? (Introduce el id)");
+			String p = key.nextLine();
+			int pos = LPet.buscaPeticion(p);
+			System.out.println("Quieres aceptar(1) o rechazar la peticion(2)?");
+			String o = key.nextLine();
 			
+			if (Integer.parseInt(o) == 1) {
+				
+			}
+			else if (Integer.parseInt(o) == 2) {
+				
+			}
 		}
-		
-		public static void opcion5() {
-			
+		/* En la opcion 5 se agrega un nuevo usuario */
+		public static void opcion5(ListaUsuarios LU) {
+			System.out.println("Introduce los datos del nuevo usuario.\n");
+			System.out.println("Nombre:\n");
+			String n=key.nextLine();
+			System.out.println("Correo:\n");
+			String c=key.nextLine();
+			System.out.println("Codigo postal:\n");
+			String cp=key.nextLine();
+			Usuario u1 = new Usuario(n,c,Integer.parseInt(cp));
+			LU.anadirUsuario(u1);
 		}
 		/* En la opcion 6 se elimina un bien de la lista de bienes */
 		public static void opcion6(ListaProductos LP) {
@@ -254,15 +276,26 @@ public class main {
 			}catch(ListaLlena exc){
 				System.out.println(exc.toString());
 				LP.AmpliarLista(p1);
-				System.out.println("Hemos ampliado el tama�o de la lista i a�adido "+p1.toString());
+				System.out.println("Hemos ampliado el tama�o de la lista i anadido "+p1.toString());
 			}
 		
 		}
-		
-		public static void opcion3_1() {
-			
+		/** En la opcion 3 del submenu 1 se crea una peticion **/
+		public static void opcion3_1(ListaPeticiones LPet) {
+			System.out.println("Introduce los datos de la peticion\n");
+			System.out.println("ID:\n");
+			String id=key.nextLine();
+			System.out.println("Proveedor:\n");
+			String pr=key.nextLine();
+			System.out.println("Cliente:\n");
+			String c=key.nextLine();
+			System.out.println("Producto pedido:\n");
+			String pp=key.nextLine();
+			System.out.println("Producto ofrecido:\n");
+			String po=key.nextLine();
+			LPet.crearPeticion(id, pr, c, pp, po);
 		}
-		/* En la opcion 1 del submenu 2 se listan la lista de bienes y la lista de servicios (falta poner la lista de peticiones)*/
+		/** En la opcion 1 del submenu 2 se listan la lista de bienes y la lista de servicios (falta poner la lista de peticiones)*/
 		public static void opcion1_2(ListaProductos LP) {
 			System.out.println(LP.toString());
 			
