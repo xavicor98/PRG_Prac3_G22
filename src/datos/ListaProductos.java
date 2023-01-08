@@ -105,7 +105,8 @@ import excepciones.ListaLlena;
 			}
 		}
 		
-		public void DesactivarServicio(String s) {
+		public void okay
+		(String s) {
 			int p=0;
 			   while(p<numProductos) {
 				   if(lista[p].getId().equalsIgnoreCase(s)) {	

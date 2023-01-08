@@ -8,12 +8,10 @@ public class Peticion {
 	private String proveedor;
 	private String cliente;
 	//Discernir entre productos
-	private String prodOfrecido;
-	private String prodPedido;
+	private String bienOfrecido;
+	private String bienPedido;
 	//Y servicios
-	private String servicioOfrecido;
-	private String servicioPedido;
-	
+
 	private int estadoPeticion = 0;
 	private int valoracion;
 	
@@ -24,8 +22,8 @@ public class Peticion {
 		this.id = id;
 		this.proveedor = proveedor;
 		this.cliente = cliente;
-		this.prodPedido = prodPedido;
-		this.prodOfrecido = prodOfrecido;
+		this.bienPedido = prodPedido;
+		this.bienOfrecido = prodOfrecido;
 	}
 
 
@@ -60,11 +58,11 @@ public class Peticion {
 	}
 
 	public String getProdOfrecido() {
-		return prodOfrecido;
+		return bienOfrecido;
 	}
 	
 	public String getProdPedido() {
-		return prodPedido;
+		return bienPedido;
 	}
 	
 	public int getEstadoPeticion() {
@@ -93,10 +91,8 @@ public class Peticion {
 					+ "id=" + id 
 					+ ", proveedor=" + proveedor
 					+ ", cliente=" + cliente
-					+ ", prodOfrecido="	+ prodOfrecido 
-					+ ", prodPedido=" + prodPedido 
-					+ ", servicioOfrecido=" + servicioOfrecido
-					+ ", servicioPedido=" + servicioPedido 
+					+ ", bienOfrecido="	+ bienOfrecido 
+					+ ", bienPedido=" + bienPedido 
 					+ ", estadoPeticion=" + estadoPeticion 
 					+ ", valoracion="+ valoracion;
 		} catch (Exception e) {
@@ -134,10 +130,8 @@ public class Peticion {
 							id+";"
 							+proveedor+";"
 							+cliente+";"
-							+prodOfrecido+";"
-							+prodPedido+";"
-							+servicioOfrecido+";"
-							+servicioPedido+";"
+							+bienOfrecido+";"
+							+bienPedido+";"
 							+estadoPeticion+";"
 							+valoracion
 
@@ -152,7 +146,9 @@ public class Peticion {
 
 
 	public Peticion copia() {
-		Peticion retorno = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		Peticion retorno = new Peticion(id, proveedor, cliente, bienPedido, bienOfrecido);
+		retorno.setEstadoPeticion(estadoPeticion);
+		retorno.setValoracion(valoracion);
 		return retorno;
 	}
 

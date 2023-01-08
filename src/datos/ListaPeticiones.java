@@ -18,15 +18,30 @@ public class ListaPeticiones {
 		lista = new Peticion[50];
 	}
 
-	//TODO Hace falta controlar qeu ambos sean productos y no servicios
+		
+	//Especifico numero 2
 	public void crearPeticion(String id, String proveedor, String cliente, String prodPedido, String prodOfrecido) {
 		
-		lista[nElementos] = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+		try {
+			if(buscaPeticion(id)==-1) {
+				lista[nElementos] = new Peticion(id, proveedor, cliente, prodPedido, prodOfrecido);
+				
+				nElementos++;
+				if(nElementos >= lista.length)
+					ampliarLista();
+			}else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		nElementos++;
-		if(nElementos >= lista.length)
-			ampliarLista();
+		
+
 	}
+	
+	
+
 	
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean aceptaPeticion(Peticion peticion) {
@@ -36,6 +51,26 @@ public class ListaPeticiones {
 		peticion.acepta();
 		return true;
 	}
+	
+	
+	//Especifico numero 1
+	public void aceptaRechaza(String peticion, int aceptaRechaza) {
+		try {
+			if(aceptaRechaza == 1) {
+				if(aceptaPeticion(lista[buscaPeticion(peticion)]) == false) {
+					throw new Exception();
+				}
+			}else {
+				if(rechazaPeticion(lista[buscaPeticion(peticion)]) == false) {
+					throw new Exception();
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+		
+	
 	
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean rechazaPeticion(Peticion peticion) {
@@ -48,17 +83,20 @@ public class ListaPeticiones {
 	public int buscaPeticion(String id) {
 		int i=0;
 		boolean trobat = false;
+		
 		while(i<nElementos && trobat == false) {
 			if(lista[i].esEsteId(id))
 				trobat = true;
 			else
 				i++;
 		}
-		if(i==nElementos)
+		if(trobat == false)
 			i=-1;
 		
 		return i;
 	}
+	
+	
 	
 	private void ampliarLista() {
 		Peticion[] temp = new Peticion[lista.length+50];
@@ -102,6 +140,52 @@ public class ListaPeticiones {
 		
 		
 		f.close();
+	}
+	
+	//Especifico numero 3
+	public String peticionesPendientes() {
+		String retorn = "";
+		for(int i=0; i < nElementos; i++) {
+			if(this.lista[i].getEstadoPeticion()==0) {
+				if(this.lista[i]!=null )
+				retorn += (lista[i].toString()+"\n");
+			}
+		}
+		return retorn;
+	}
+	
+	//Especifico numero 4
+	public String peticionesAceptadas() {
+		String retorn = "";
+		for(int i=0; i < nElementos; i++) {
+			if(this.lista[i].getEstadoPeticion()==1) {
+				if(this.lista[i]!=null )
+				retorn += (lista[i].toString()+"\n");
+			}
+		}
+		return retorn;
+	}
+	//Especifico numero 5
+	public String peticionesRechazadas() {
+		String retorn = "";
+		for(int i=0; i < nElementos; i++) {
+			if(this.lista[i].getEstadoPeticion()==-1) {
+				if(this.lista[i]!=null )
+				retorn += (lista[i].toString()+"\n");
+			}
+		}
+		return retorn;
+	}
+	
+	//Especifico 6
+	public Peticion getPeticion(String peticion) {
+		Peticion retorno = null;
+		try {
+			retorno = lista[buscaPeticion(peticion)].copia();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return retorno;
 	}
 	
 	@Override
