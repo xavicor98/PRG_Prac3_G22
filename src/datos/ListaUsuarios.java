@@ -35,6 +35,15 @@ public class ListaUsuarios {
 		
 	}
 
+	public String listaProductos(String alias) {
+		try {
+			return listaUsuarios[buscaUsuario(alias)].getProductos();
+		} catch (Exception e) {
+			System.out.println(alias+" No existe");
+		}
+		return "";
+	}
+	
 	public int  buscaUsuario(String alias) {
 		int i=0;
 		boolean trobat = false;
@@ -75,6 +84,9 @@ public class ListaUsuarios {
 		w.close();
 		
 	}
+	
+	
+	
 	/*public void leerFichero(String nFichero) throws FileNotFoundException {
 		int nLineas;
 		String info ="";

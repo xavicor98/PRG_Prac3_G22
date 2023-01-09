@@ -20,7 +20,8 @@ public class VentanaGrafica extends JFrame {
 	ListaProductos listaProductos = new ListaProductos();
 	ListaUsuarios listaUsuarios = new ListaUsuarios();
 	ListaPeticiones listaPeticiones = new ListaPeticiones();
-
+	String nombreUsuario;
+	
 	 //TODO revisar excepciones
 	  public VentanaGrafica() throws IOException, ListaLlena {
 		  super("Aplicación intercambios grupo G22");
@@ -59,6 +60,15 @@ public class VentanaGrafica extends JFrame {
 	        }
 	      });
 	    
+	    //Añadir listado de productos que tiene el usuario actual
+	    JComboBox<String> listadoProductos = new JComboBox<>();
+	    
+	    stringProductos = obtenerProductosUsuario();
+	    
+	    for(int i=0; i<stringProductos.length; i++)
+	    	listadoProductos.addItem(stringProductos[i]);
+	    
+	    add(listadoProductos);
 	    add(usuario, BorderLayout.PAGE_START);
 	    add(cambiarNombre, BorderLayout.PAGE_END);	
 	    add(desplegableProductos, BorderLayout.LINE_START);
@@ -70,7 +80,7 @@ public class VentanaGrafica extends JFrame {
 		  String nombre = JOptionPane.showInputDialog("Ingrese su nombre:");
 		    while(nombre == null || nombre.isEmpty())
 		    	nombre = JOptionPane.showInputDialog("Porfavor, ingrese su nombre:");
-		   
+		    	nombreUsuario = nombre;
 		   return nombre;
 	  }
 	  
@@ -80,4 +90,7 @@ public class VentanaGrafica extends JFrame {
 		  return listaProductos.getInfoLista().split(";");
 	  }
 	  
+	  private String[] obtenerProductosUsuario() {
+		  return listaUsuarios.listaProductos(nombreUsuario).split(";");
+	  }
 }

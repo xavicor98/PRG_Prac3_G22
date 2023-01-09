@@ -129,5 +129,15 @@ public class Usuario {
 		
 		peticiones = nuevaLista;
 	}
+
+	public String getProductos() {
+		String retorno ="";
+		
+		for(int i=0; i<nProductos; i++) {
+			retorno += productosOfrece[i].getId()+";";
+		}
+		
+		return retorno;
+	}
 }
 
