@@ -28,10 +28,10 @@ public class main {
 				opcion1(LP,LPet);
 				break;
 			case 2:
-				opcion2(LP);
+				opcion2(LP,LPet,LU);
 				break;
 			case 3:
-				opcion3(LP);
+				opcion3(LPet);
 				break;
 			case 4:
 				opcion4(LPet);
@@ -46,7 +46,7 @@ public class main {
 				opcion7(LP);
 				break;
 			case 8:
-				opcion8(LP);
+				opcion8(LP,LPet);
 				break;
 			case 9:
 				salir(LP);
@@ -125,14 +125,14 @@ public class main {
 			}
 		}
 		/* En la opcion 2 mostrara el segundo submenu */
-		public static void opcion2(ListaProductos LP) {
+		public static void opcion2(ListaProductos LP, ListaPeticiones LPet, ListaUsuarios LU) {
 			int opcion;
 			mostraSubMenu2();
 			opcion = Integer.parseInt(key.nextLine());
 			while (opcion != 4) {
 				switch (opcion) {
 				case 1:
-					opcion1_2(LP);
+					opcion1_2(LP,LPet,LU);
 					break;
 				case 2:
 					opcion2_2(LP);
@@ -146,23 +146,23 @@ public class main {
 			}
 		}
 		/* En la opcion 3 mostrara el tercer submenu */
-		public static void opcion3(ListaProductos LP) {
+		public static void opcion3(ListaPeticiones LPet) {
 			int opcion;
 			mostraSubMenu3();
 			opcion = Integer.parseInt(key.nextLine());
 			while (opcion != 6) {
 				switch (opcion) {
 				case 1:
-					opcion1_3();
+					opcion1_3(LPet);
 					break;
 				case 2:
-					opcion2_3();
+					opcion2_3(LPet);
 					break;
 				case 3:
-					opcion3_3();
+					opcion3_3(LPet);
 					break;
 				case 4:
-					opcion4_3();
+					opcion4_3(LPet);
 					break;
 				case 5:
 					opcion5_3();
@@ -172,7 +172,7 @@ public class main {
 				opcion = Integer.parseInt(key.nextLine());
 			}
 		}
-		/** En la opcion 4 se acepta o se rechaza una peticion a partir de su id **/
+		/* En la opcion 4 se acepta o se rechaza una peticion a partir de su id */
 		public static void opcion4(ListaPeticiones LPet) {
 			System.out.println(LPet.toString());
 			System.out.println("Que peticion quieres aceptar o rechazar? (Introduce el id)");
@@ -180,13 +180,7 @@ public class main {
 			int pos = LPet.buscaPeticion(p);
 			System.out.println("Quieres aceptar(1) o rechazar la peticion(2)?");
 			String o = key.nextLine();
-			
-			if (Integer.parseInt(o) == 1) {
-				
-			}
-			else if (Integer.parseInt(o) == 2) {
-				
-			}
+			LPet.aceptaRechaza(p, Integer.parseInt(o));
 		}
 		/* En la opcion 5 se agrega un nuevo usuario */
 		public static void opcion5(ListaUsuarios LU) {
@@ -210,16 +204,17 @@ public class main {
 		public static void opcion7(ListaProductos LP) {
 			System.out.println("Que servicio quieres desactivar?");
 			String n=key.nextLine();
-			LP.DesactivarServicio(n);
+/**			LP.DesactivarServicio(n); **/
 		}
-		/* En la opcion 8 se mostraran todas las listas (falta por poner la lista de servicios)*/
-		public static void opcion8(ListaProductos LP) throws IOException, ListaLlena {
+		/* En la opcion 8 se mostraran todas las listas */
+		public static void opcion8(ListaProductos LP, ListaPeticiones LPet) throws IOException, ListaLlena {
 			LP.LeerServicio();
 			try {
 			LP.LeerBien();
 			}catch(NumberFormatException e) {
 				
 			}
+			LPet.leerFichero("Peticiones.txt");
 		}
 		/* En la opcion 1 del submenu 1 se crea un servicio en la lista de servicios */
 		public static void opcion1_1(ListaProductos LP) throws ListaLlena {
@@ -280,7 +275,7 @@ public class main {
 			}
 		
 		}
-		/** En la opcion 3 del submenu 1 se crea una peticion **/
+		/* En la opcion 3 del submenu 1 se crea una peticion */
 		public static void opcion3_1(ListaPeticiones LPet) {
 			System.out.println("Introduce los datos de la peticion\n");
 			System.out.println("ID:\n");
@@ -295,16 +290,29 @@ public class main {
 			String po=key.nextLine();
 			LPet.crearPeticion(id, pr, c, pp, po);
 		}
-		/** En la opcion 1 del submenu 2 se listan la lista de bienes y la lista de servicios (falta poner la lista de peticiones)*/
-		public static void opcion1_2(ListaProductos LP) {
-			System.out.println(LP.toString());
+		/* En la opcion 1 del submenu 2 se elige que lista mostrar */
+		public static void opcion1_2(ListaProductos LP, ListaPeticiones LPet, ListaUsuarios LU) {
+			System.out.println("Que lista quieres ver?");
+			System.out.println("1. Bienes y servicios");
+			System.out.println("2. Peticiones");
+			System.out.println("3. Usuarios");
+			String o=key.nextLine();
+			if (Integer.parseInt(o) == 1) {
+				System.out.println(LP.toString());
+			}
+			else if (Integer.parseInt(o) == 2) {
+				System.out.println(LPet.toString());
+			}
+			else if (Integer.parseInt(o) == 3) {
+				System.out.println(LU.toString());
+			}
 			
 		}
 		/* En la opcion 2 del submenu 2 se listan los servicios activos de la lista de servicios */
 		public static void opcion2_2(ListaProductos LP) {
 			LP.MostrarProductos();
 		}
-		/* En la opcion 3 del submenu 3 se litan todos los bienes de la lista de bienes */
+		/* En la opcion 3 del submenu 2 se litan todos los bienes de la lista de bienes */
 		public static void opcion3_2(ListaProductos LP) {
 			LP.MostrarBienes();
 		}
@@ -317,23 +325,23 @@ public class main {
 				LP.EscribeBien();
 			}
 		}
-		
-		public static void opcion1_3() {
+		/* En la opcion 1 del submenu 3 se muestran las peticiones pendientes de aceptar o rechazar */
+		public static void opcion1_3(ListaPeticiones LPet) {
+			System.out.println(LPet.peticionesPendientes());
+		}
+		/* En la opcion 2 del submenu 3 se muestran las peticiones aceptadas */
+		public static void opcion2_3(ListaPeticiones LPet) {
+			System.out.println(LPet.peticionesAceptadas());
+		}
+		/* En la opcion 3 del submenu 3 se muestran las peticiones rechazadas */
+		public static void opcion3_3(ListaPeticiones LPet) {
+			System.out.println(LPet.peticionesRechazadas());
+		}
+		/* En la opcion 4 del submenu 3 muestra los usuarios con una valoracion superior a x*/
+		public static void opcion4_3(ListaPeticiones LPet) {
 			
 		}
-		
-		public static void opcion2_3() {
-			
-		}
-		
-		public static void opcion3_3() {
-			
-		}
-		
-		public static void opcion4_3() {
-			
-		}
-		
+		/* En la opcion 5 del submenu 3 muestra el servicio con el que se han hecho mas intercambios */
 		public static void opcion5_3() {
 			
 		}

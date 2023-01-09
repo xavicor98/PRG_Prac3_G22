@@ -18,7 +18,6 @@ public class ListaPeticiones {
 		lista = new Peticion[50];
 	}
 
-		
 	//Especifico numero 2
 	public void crearPeticion(String id, String proveedor, String cliente, String prodPedido, String prodOfrecido) {
 		
@@ -35,13 +34,7 @@ public class ListaPeticiones {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
-
 	}
-	
-	
-
 	
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean aceptaPeticion(Peticion peticion) {
@@ -51,7 +44,6 @@ public class ListaPeticiones {
 		peticion.acepta();
 		return true;
 	}
-	
 	
 	//Especifico numero 1
 	public void aceptaRechaza(String peticion, int aceptaRechaza) {
@@ -69,8 +61,6 @@ public class ListaPeticiones {
 			// TODO: handle exception
 		}
 	}
-		
-	
 	
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean rechazaPeticion(Peticion peticion) {
@@ -96,8 +86,6 @@ public class ListaPeticiones {
 		return i;
 	}
 	
-	
-	
 	private void ampliarLista() {
 		Peticion[] temp = new Peticion[lista.length+50];
 		
@@ -106,7 +94,6 @@ public class ListaPeticiones {
 		
 		lista = temp;
 	}
-	
 	
 	public  void guardaFichero(String nFichero) throws IOException {
 		BufferedWriter w = new BufferedWriter(new FileWriter(nFichero+".csv"));
@@ -135,10 +122,6 @@ public class ListaPeticiones {
 			infoSeparada = info.split(";");
 			crearPeticion(infoSeparada[0], infoSeparada[1], infoSeparada[2], infoSeparada[3], infoSeparada[4]);
 		}
-		
-		
-		
-		
 		f.close();
 	}
 	
@@ -165,6 +148,7 @@ public class ListaPeticiones {
 		}
 		return retorn;
 	}
+	
 	//Especifico numero 5
 	public String peticionesRechazadas() {
 		String retorn = "";
@@ -197,11 +181,4 @@ public class ListaPeticiones {
 		}
 		return retorn;
 	}
-	
-
-	
 }
-	
-
-
-

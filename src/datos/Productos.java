@@ -39,10 +39,12 @@ public class Productos {
 	
 	public void setDataOf(Data dataOf) {
 		dataOferta = dataOf;
-	
 	}
 	
-	
+	public Productos copia() {
+		Productos retorno = new Productos(id,descripcion,dataOferta);
+		return retorno;
+	}
 	
 	// To String
 	public String toString() {

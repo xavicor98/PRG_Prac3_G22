@@ -10,6 +10,7 @@ public class Servicios extends Productos {
 	private Data fechaVigencia;
 	private boolean intercanvioPrevio;
 	protected  String estado;
+	
 	public Servicios(String id,String desc,Data d,Data fechaVi) {
 		super(id, desc,d );
 		fechaVigencia = fechaVi;

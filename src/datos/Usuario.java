@@ -1,4 +1,4 @@
-	package datos;
+package datos;
 
 /* Programador: Joan Ignasi Cid guardia */
 
@@ -121,8 +121,6 @@ public class Usuario {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 	//lo mismo para la lista de productos
 }
