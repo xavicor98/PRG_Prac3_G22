@@ -1,13 +1,13 @@
-package datos;
+	package datos;
 
-/* Programador: Joan Ignasi Cid guardia */
+/* Programador: Francisco Manuel Gonzalez Ortegon */
 
 public class Usuario {
 	private String alias;
 	private String correo;
 	private int cp;
 	
-	//Lista de productos
+	private Productos[] productosOfrece;
 	private int nProductos;
 	
 	private Peticion[] peticiones;
@@ -18,15 +18,16 @@ public class Usuario {
 		this.correo = correo;
 		this.cp = cp;
 		peticiones = new Peticion[10];
-		//para lista de productos lo mismo
+		productosOfrece = new Productos[10];
 	}
 	
-	public Usuario(String alias, String correo, int cp, Peticion[] peticiones/*, La clase del producto*/) {
+	public Usuario(String alias, String correo, int cp, Peticion[] peticiones, Productos[] productosOfrece) {
 		this.alias = alias;
 		this.correo = correo;
 		this.cp = cp;
-		this.peticiones = peticiones;		//no le meto copia porque seria informacion redundante, la peticion ya se guarda en su lista correspondiente
-		//para lista de productos lo mismo
+		this.peticiones = peticiones;//no le meto copia porque seria informacion redundante, la peticion ya se guarda en su lista correspondiente
+		this.productosOfrece = productosOfrece;
+		
 	}
 	
 
@@ -40,8 +41,19 @@ public class Usuario {
 	}
 	
 	//TODO completar clase 
-	public void anadirProducto(/*clase productos*/) {
-		//Lo mismo pero para los productos
+	public void anadirProducto(Productos producto) {
+		if(nProductos>productosOfrece.length) {
+			Productos[] nuevaLista = new Productos[productosOfrece.length + 20];
+			for (int i=0; i<productosOfrece.length;i++) {
+				nuevaLista[i] = productosOfrece[i].copia();
+			}
+			productosOfrece = nuevaLista;
+		}
+		productosOfrece[nProductos] = producto.copia();
+		nProductos++;
+		
+		
+		
 	}
 	
 	public boolean esEsteAlias(String alias) {
@@ -50,7 +62,7 @@ public class Usuario {
 	
 
 	public Usuario copia() {
-		return new Usuario(alias, correo, cp, peticiones/*, La clase del producto*/);
+		return new Usuario(alias, correo, cp, peticiones, productosOfrece);
 	}
 	
 	/**
@@ -101,8 +113,9 @@ public class Usuario {
 	
 	//TODO una vez tenga la clase productos hare
 	public String getProductoI(int i) {
-		//return productos[i].getId();
-		return "producto";
+		
+		return productosOfrece[i].getId();
+		
 	}
 	
 	//si no dejan genéricos ni java.array tengo que crear dos clases para cada tipo de lista
@@ -116,11 +129,5 @@ public class Usuario {
 		
 		peticiones = nuevaLista;
 	}
-
-	public static Peticion getUsuario(String proveedor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//lo mismo para la lista de productos
 }
+

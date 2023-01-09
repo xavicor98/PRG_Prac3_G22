@@ -1,6 +1,7 @@
 package datos;
 
 import java.io.*;
+import java.util.Scanner;
 
 /* Programador: Francisco Manuel Gonzalez Ortegon */
 public class ListaUsuarios {
@@ -74,5 +75,29 @@ public class ListaUsuarios {
 		w.close();
 		
 	}
+	/*public void leerFichero(String nFichero) throws FileNotFoundException {
+		int nLineas;
+		String info ="";
+		Usuario[] infoSeparada;
+		Scanner f = new Scanner(new File(nFichero));
+		nLineas = Integer.parseInt(f.nextLine()); 
+		
+		for(int i=0; i<nLineas; i++) {
+			info = f.nextLine();
+			infoSeparada = info.split(";");
+			anadirUsuario(infoSeparada[0], infoSeparada[1], infoSeparada[2], infoSeparada[3], infoSeparada[4]);
+		}
+		
+		
+		
+		
+		f.close();
+	}*/
+
+
+		
+	
 	
 }
+	
+
