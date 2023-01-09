@@ -10,6 +10,9 @@ public class Servicios extends Productos {
 	private Data fechaVigencia;
 	private boolean intercanvioPrevio;
 	protected  String estado;
+	private int vecesUsado;
+	
+	
 	
 	public Servicios(String id,String desc,Data d,Data fechaVi) {
 		super(id, desc,d );
@@ -17,7 +20,15 @@ public class Servicios extends Productos {
 		intercanvioPrevio = false;
 		estado="Activo";
 	}
-
+	
+	public void usar() {
+		vecesUsado++;
+	}
+	
+	public int getVecesUsado() {
+		return vecesUsado;
+	}
+	
 	public Data getFechaVigencia() {
 		return fechaVigencia;
 	}

@@ -240,6 +240,21 @@ import excepciones.ListaLlena;
 			
 			return listaProductos;
 		}
+		
+		public String masUsado() {
+			String masUsado ="";
+			int masVeces = 0;
+			
+			for(int i=0; i<numProductos; i++) {
+				if(lista[i] instanceof Servicios) {
+					if(masVeces < ((Servicios) lista[i]).getVecesUsado())
+						masUsado = lista[i].getId();
+				}
+			}
+			
+			return masUsado;
+		}
+		
 	}
 
 
