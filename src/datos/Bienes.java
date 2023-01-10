@@ -10,6 +10,7 @@ public class Bienes extends Productos {
 	private int[] dimension; 
 	private double peso;
 	private Data intercambio; 
+	
 	public Bienes(String id,String de,Data d,int ampl,int alc,int fons,double p,Data inter) {
 		super(id, de,d);
 		dimension  = new int[3]; 

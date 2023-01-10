@@ -12,12 +12,6 @@ public class main {
 		ListaProductos LP = new ListaProductos();
 		ListaPeticiones LPet = new ListaPeticiones();
 		ListaUsuarios LU = new ListaUsuarios();
-		
-		for(int i=0; i<50; i++) {
-			  Productos producto = new Productos("Producto"+i, ""+i, null);
-			  LP.AnadirProducto(producto);
-		}
-
 
 		mostraMenu();
 		opcion = Integer.parseInt(key.nextLine());
@@ -204,7 +198,7 @@ public class main {
 		public static void opcion7(ListaProductos LP) {
 			System.out.println("Que servicio quieres desactivar?");
 			String n=key.nextLine();
-/**			LP.DesactivarServicio(n); **/
+			LP.DesactivarServicio(n);
 		}
 		/* En la opcion 8 se mostraran todas las listas */
 		public static void opcion8(ListaProductos LP, ListaPeticiones LPet) throws IOException, ListaLlena {
@@ -231,7 +225,7 @@ public class main {
 			String[] d2 = f2.split("/");
 			Data D1 = new Data(Integer.parseInt(d1[0]),Integer.parseInt(d1[1]),Integer.parseInt(d1[2]));
 			Data D2 = new Data(Integer.parseInt(d2[0]),Integer.parseInt(d2[1]),Integer.parseInt(d2[2]));
-			Productos p1 = new Servicios(n, d, D1, D2);
+			Servicios p1 = new Servicios(n, d, D1, D2);
 			try {
 			LP.AnadirProducto(p1);
 			}catch(ListaLlena exc){
