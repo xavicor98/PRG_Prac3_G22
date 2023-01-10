@@ -5,16 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Productos {
+public abstract class Productos {
 	private String id;
 	private String descripcion;
 	private Data dataOferta;
 	
 	public Productos (String id, String des, Data dataOf) {
-		this.id = id +" ";
+		this.id = id;
 		descripcion = des;
 		dataOferta = dataOf;
-		
 	}
 	// Getters
 	public String getId() {
@@ -41,21 +40,8 @@ public class Productos {
 		dataOferta = dataOf;
 	}
 	
-	public Productos copia() {
-		Productos retorno = new Productos(id,descripcion,dataOferta);
-		return retorno;
-	}
-	
 	// To String
 	public String toString() {
 		return " [Id=" + id + ", Descripcion=" + descripcion + ", DataOferta=" + dataOferta ;
-	}
-	public static String getProducto(String prodOfrecido) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	}
-
-
-
+	}	
+}

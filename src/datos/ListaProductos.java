@@ -68,19 +68,18 @@ import excepciones.ListaLlena;
 		int p=0;
 		   while(p<numProductos) {
 			   if(lista[p] instanceof Servicios) {	
-				   if(((Servicios)lista[p]).getEstado().equalsIgnoreCase("Activo")){
+				   if(  ((Servicios)lista[p]).getEstado().equalsIgnoreCase("Activo")){
 				   System.out.println(((Servicios)lista[p]).toString());
+				   }
 			   }
-			   
-		   }
 			   p++;
+		   }
 		}
-		}
+		
 		public void MostrarBienes() {
 			int p=0;
 			   while(p<numProductos) {
-				   if(lista[p] instanceof Bienes) {	
-					 
+				   if(lista[p] instanceof Bienes) {
 					   System.out.println(((Bienes)lista[p]).toString());
 				   }
 				   p++;
@@ -140,25 +139,26 @@ import excepciones.ListaLlena;
 			String frase ;
 			frase=f.readLine();
 			while (frase!=null) {
-			System.out.println("Se ha leido la linea: "+ frase);
-			StringTokenizer st = new StringTokenizer(frase,";");
-			String id=st.nextToken();
-			String des=st.nextToken();
-			String[] S=st.nextToken().split("/");
-			String[] S2=st.nextToken().split("/");
-			boolean in=Boolean.parseBoolean(st.nextToken());
-			String e=st.nextToken();
-			Data d1=new Data(0,0,0000) ;
-			Data d2 =new Data(0,0,0000 );
-			d1.setData(Integer.parseInt(S[0]), Integer.parseInt(S[1]), Integer.parseInt(S[2]));
-			d2.setData(Integer.parseInt(S2[0]), Integer.parseInt(S2[1]), Integer.parseInt(S2[2]));
-			Productos p=new Servicios(id, des, d1, d2);
+				System.out.println("Se ha leido la linea: "+ frase);
+				StringTokenizer st = new StringTokenizer(frase,";");
+				String id=st.nextToken();
+				String des=st.nextToken();
+				String[] S=st.nextToken().split("/");
+				String[] S2=st.nextToken().split("/");
+				boolean in=Boolean.parseBoolean(st.nextToken());
+				String e=st.nextToken();
+				Data d1=new Data(0,0,0000);
+				Data d2 =new Data(0,0,0000 );
+				d1.setData(Integer.parseInt(S[0]), Integer.parseInt(S[1]), Integer.parseInt(S[2]));
+				d2.setData(Integer.parseInt(S2[0]), Integer.parseInt(S2[1]), Integer.parseInt(S2[2]));
+				Servicios p=new Servicios(id, des, d1, d2);
 			
 			try {
 				AnadirProducto(p);
 				((Servicios)p).setEstado(e);
 				((Servicios)p).setIntercanvioPrevio(in);
-				}catch(ListaLlena exc){
+				}
+			catch(ListaLlena exc){
 					System.out.println(exc.toString());
 					AmpliarLista(p);
 					System.out.println("Hemos ampliado el tamano de la lista i anadido "+p.toString());
@@ -241,21 +241,21 @@ import excepciones.ListaLlena;
 			return listaProductos;
 		}
 		
-		public String masUsado() {
-			String masUsado ="";
-			int masVeces = 0;
-			
-			for(int i=0; i<numProductos; i++) {
-				if(lista[i] instanceof Servicios) {
-					if(masVeces < ((Servicios) lista[i]).getVecesUsado())
-						masUsado = lista[i].getId();
-				}
-			}
-			
-			return masUsado;
-		}
+		public void DesactivarServicio(String s) {
+			int p=0;
+			   while(p<numProductos) {
+				   if(lista[p].getId().equalsIgnoreCase(s)) {	
+					   if(lista[p] instanceof Servicios) {	
+					    ((Servicios)lista[p]).setEstado("Inactivo");
+					   }
+				   }
+				   p++;
+			   }
 		
+		}
 	}
+	
+	
 
 
 
