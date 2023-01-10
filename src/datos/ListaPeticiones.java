@@ -1,4 +1,3 @@
-//TODO
 package datos;
 
 import java.io.BufferedWriter;
@@ -7,17 +6,32 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-/* Programador: Juan Ignasi Cid Guardia */
+
 public class ListaPeticiones {
 	
+	/** Lista de las peticiones. */
 	private Peticion[] lista;
+	
+	/** Numero de elementos. */
 	private int nElementos = 0;
 
+	/**
+	 * Cuando se crea una instancia se asignan 50 posiciones a la lista.
+	 */
 	//Constructor de la lista de peticiones con 50 elementos por defecto
 	public ListaPeticiones() {
 		lista = new Peticion[50];
 	}
 
+	/**
+	 * Crear peticion.
+	 *
+	 * @param id el id
+	 * @param proveedor el proveedor
+	 * @param cliente el cliente
+	 * @param prodPedido el producto pedido
+	 * @param prodOfrecido el producto ofrecido
+	 */
 	//Especifico numero 2
 	public void crearPeticion(String id, String proveedor, String cliente, String prodPedido, String prodOfrecido) {
 		
@@ -32,10 +46,16 @@ public class ListaPeticiones {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			// Hace falta poner la propia excepcion
 		}
 	}
 	
+	/**
+	 * Acepta peticion.
+	 *
+	 * @param peticion la peticion
+	 * @return true, si ha sido visualizada y se ha aceptado
+	 */
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean aceptaPeticion(Peticion peticion) {
 		
@@ -45,6 +65,12 @@ public class ListaPeticiones {
 		return true;
 	}
 	
+	/**
+	 * Acepta rechaza.
+	 *
+	 * @param peticion el peticion para aceptar o rechazar
+	 * @param aceptaRechaza 1 para aceptar otro valor para rechazar
+	 */
 	//Especifico numero 1
 	public void aceptaRechaza(String peticion, int aceptaRechaza) {
 		try {
@@ -62,6 +88,12 @@ public class ListaPeticiones {
 		}
 	}
 	
+	/**
+	 * Rechaza peticion.
+	 *
+	 * @param peticion la peticion
+	 * @return true, si ha sido visualizada y se ha podido rechazar
+	 */
 	//devuelve falso si la peticion no ha sido visualizada
 	public boolean rechazaPeticion(Peticion peticion) {
 		if(peticion.getEstadoPeticion() == 1)
@@ -69,6 +101,13 @@ public class ListaPeticiones {
 		peticion.rechaza();
 		return true;
 	}
+	
+	/**
+	 * Busca peticion.
+	 *
+	 * @param id el id de la peticion a buscar
+	 * @return la posicion de la lista en donde esta la peticion
+	 */
 	
 	public int buscaPeticion(String id) {
 		int i=0;
@@ -86,6 +125,9 @@ public class ListaPeticiones {
 		return i;
 	}
 	
+	/**
+	 * Ampliar lista.
+	 */
 	private void ampliarLista() {
 		Peticion[] temp = new Peticion[lista.length+50];
 		
@@ -95,6 +137,12 @@ public class ListaPeticiones {
 		lista = temp;
 	}
 	
+	/**
+	 * Guarda fichero.
+	 *
+	 * @param nFichero el nombre del fichero
+	 * @throws IOException en caso de haber algun problema con la escritura del archivo.
+	 */
 	public  void guardaFichero(String nFichero) throws IOException {
 		BufferedWriter w = new BufferedWriter(new FileWriter(nFichero+".csv"));
 		
@@ -109,6 +157,12 @@ public class ListaPeticiones {
 		w.close();
 	}
 	
+	/**
+	 * Leer fichero.
+	 *
+	 * @param nFichero el nombre del fichero para leer
+	 * @throws FileNotFoundException si no se ha encontrado el fichero
+	 */
 	//Lee de un archivo y devuelve una lista de peticiones
 	public void leerFichero(String nFichero) throws FileNotFoundException {
 		int nLineas;
@@ -125,6 +179,11 @@ public class ListaPeticiones {
 		f.close();
 	}
 	
+	/**
+	 * Peticiones pendientes.
+	 *
+	 * @return string de peticiones no visualizadas
+	 */
 	//Especifico numero 3
 	public String peticionesPendientes() {
 		String retorn = "";
@@ -137,6 +196,11 @@ public class ListaPeticiones {
 		return retorn;
 	}
 	
+	/**
+	 * Peticiones aceptadas.
+	 *
+	 * @return string de peticiones aceptadas
+	 */
 	//Especifico numero 4
 	public String peticionesAceptadas() {
 		String retorn = "";
@@ -149,6 +213,11 @@ public class ListaPeticiones {
 		return retorn;
 	}
 	
+	/**
+	 * Peticiones rechazadas.
+	 *
+	 * @return string de peticiones rechazadas
+	 */
 	//Especifico numero 5
 	public String peticionesRechazadas() {
 		String retorn = "";
@@ -161,6 +230,12 @@ public class ListaPeticiones {
 		return retorn;
 	}
 	
+	/**
+	 * Gets the peticion.
+	 *
+	 * @param peticion peticion a buscar y devolver
+	 * @return peticion que se pide, null en caso de no existir
+	 */
 	//Especifico 6
 	public Peticion getPeticion(String peticion) {
 		Peticion retorno = null;
@@ -172,6 +247,11 @@ public class ListaPeticiones {
 		return retorno;
 	}
 	
+	/**
+	 * To string.
+	 *
+	 * @return string con la informacion de la clase
+	 */
 	@Override
 	public String toString() {
 		String retorn = "";
