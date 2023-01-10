@@ -44,6 +44,16 @@ public class ListaUsuarios {
 		return "";
 	}
 	
+
+	public String listaPeticiones(String alias) {
+		try {
+			return listaUsuarios[buscaUsuario(alias)].getPeticiones();
+		} catch (Exception e) {
+			System.out.println(alias+" No existe");
+		}
+		return "";
+	}
+	
 	public int  buscaUsuario(String alias) {
 		int i=0;
 		boolean trobat = false;

@@ -21,7 +21,7 @@ public class VentanaGrafica extends JFrame {
 	ListaUsuarios listaUsuarios = new ListaUsuarios();
 	ListaPeticiones listaPeticiones = new ListaPeticiones();
 	String nombreUsuario;
-	
+	String[] listaProductosUsuario;
 	 //TODO revisar excepciones
 	  public VentanaGrafica() throws IOException, ListaLlena {
 		  super("Aplicación intercambios grupo G22");
@@ -41,7 +41,7 @@ public class VentanaGrafica extends JFrame {
 		  
 		//Inicializar ventana<	    
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setLayout(new BorderLayout());	   
+	    setLayout(new GridLayout(10, 10));	   
 	    
 	    JLabel usuario = new JLabel("Bienvenido, " +  pideNombre()+", Seleccione un producto de la lista");
 	    
@@ -62,16 +62,32 @@ public class VentanaGrafica extends JFrame {
 	    
 	    //Añadir listado de productos que tiene el usuario actual
 	    JComboBox<String> listadoProductos = new JComboBox<>();
-	    
 	    stringProductos = obtenerProductosUsuario();
-	    
 	    for(int i=0; i<stringProductos.length; i++)
 	    	listadoProductos.addItem(stringProductos[i]);
-	    
+
+	    add(usuario);
 	    add(listadoProductos);
-	    add(usuario, BorderLayout.PAGE_START);
-	    add(cambiarNombre, BorderLayout.PAGE_END);	
-	    add(desplegableProductos, BorderLayout.LINE_START);
+	    add(cambiarNombre);	
+	    add(desplegableProductos);
+	    
+	   //He puesto estos valores porque no tengo la lista de productos de cada usuario
+
+	    String[]intercambiosUsuario = obtenerIntercambiosUsuario();
+	    //Aqui recibiria los intercambios que tiene el usuario y lo pondría en cada botón
+	    int nlineas= intercambiosUsuario.length/2/4;
+	    for(int i=0; i<4;i++) {
+	    	for(int j=0; j<3;j++) {
+	    		JButton boton = new JButton(j+"");
+	    		boton.addActionListener(new ActionListener() {
+	    	        @Override
+	    	        public void actionPerformed(ActionEvent e) {
+	    	        	boton.setBackground(Color.blue);
+	    	        }
+	    	      });
+	    		this.add(boton);
+	    	}
+	    }
 	    
 	  }
 	  
@@ -84,7 +100,6 @@ public class VentanaGrafica extends JFrame {
 		   return nombre;
 	  }
 	  
-
 	  
 	  private String[] obtenerOfertas() {
 		  return listaProductos.getInfoLista().split(";");
@@ -92,5 +107,9 @@ public class VentanaGrafica extends JFrame {
 	  
 	  private String[] obtenerProductosUsuario() {
 		  return listaUsuarios.listaProductos(nombreUsuario).split(";");
+	  }
+	  
+	  private String[] obtenerIntercambiosUsuario() {
+		  return listaUsuarios.listaPeticiones(nombreUsuario).split(";");
 	  }
 }

@@ -139,5 +139,14 @@ public class Usuario {
 		
 		return retorno;
 	}
+
+	public String getPeticiones() {
+		String retorno ="";
+		
+		for(int i=0; i<nProductos; i++) {
+			retorno += peticiones[i].getId()+";"+peticiones[i].getValoracion()+";";
+		}
+		return retorno;
+	}
 }
 
